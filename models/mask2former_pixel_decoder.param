@@ -1,0 +1,336 @@
+7767517
+334 406    
+MemoryData               level_embed/359                      0 1 level_embed/359 0=256 1=1 2=3
+Split                    level_embed_splitncnn_input1         1 3 level_embed/359 level_embed_splitncnn_0 level_embed_splitncnn_1 level_embed_splitncnn_2
+Crop                     Slice_4                  1 1 level_embed_splitncnn_2 level_embed_2 -23309=1,0 -23310=1,1 -23311=1,0
+Crop                     Slice_9                  1 1 level_embed_splitncnn_1 level_embed_1 -23309=1,1 -23310=1,2 -23311=1,0
+Crop                     Slice_14                 1 1 level_embed_splitncnn_0 level_embed_0 -23309=1,2 -23310=1,2147483647 -23311=1,0
+Input                    pixel_decoder_features2 0 1 pixel_decoder_features2
+Input                    pixel_decoder_features3 0 1 pixel_decoder_features3
+Input                    pixel_decoder_features4 0 1 pixel_decoder_features4
+Input                    pixel_decoder_pos_em1  0 1 pixel_decoder_pos_em1
+Input                    pixel_decoder_pos_em2  0 1 pixel_decoder_pos_em2
+Input                    pixel_decoder_pos_em3  0 1 pixel_decoder_pos_em3
+Input                    pixel_decoder_reference_points 0 1 pixel_decoder_reference_points
+Split                    pixel_decoder_splitncnn_input6 1 12 pixel_decoder_reference_points pixel_decoder_reference_points_splitncnn_0 pixel_decoder_reference_points_splitncnn_1 pixel_decoder_reference_points_splitncnn_2 pixel_decoder_reference_points_splitncnn_3 pixel_decoder_reference_points_splitncnn_4 pixel_decoder_reference_points_splitncnn_5 pixel_decoder_reference_points_splitncnn_6 pixel_decoder_reference_points_splitncnn_7 pixel_decoder_reference_points_splitncnn_8 pixel_decoder_reference_points_splitncnn_9 pixel_decoder_reference_points_splitncnn_10 pixel_decoder_reference_points_splitncnn_11
+Input                    pixel_decoder_spatial_shapes 0 1 pixel_decoder_spatial_shapes
+Split                    pixel_decoder_splitncnn_input8 1 6 pixel_decoder_spatial_shapes pixel_decoder_spatial_shapes_splitncnn_0 pixel_decoder_spatial_shapes_splitncnn_1 pixel_decoder_spatial_shapes_splitncnn_2 pixel_decoder_spatial_shapes_splitncnn_3 pixel_decoder_spatial_shapes_splitncnn_4 pixel_decoder_spatial_shapes_splitncnn_5
+Input                    pixel_decoder_offset_normalizer 0 1 pixel_decoder_offset_normalizer
+Split                    pixel_decoder_splitncnn_input12 1 12 pixel_decoder_offset_normalizer pixel_decoder_offset_normalizer_splitncnn_0 pixel_decoder_offset_normalizer_splitncnn_1 pixel_decoder_offset_normalizer_splitncnn_2 pixel_decoder_offset_normalizer_splitncnn_3 pixel_decoder_offset_normalizer_splitncnn_4 pixel_decoder_offset_normalizer_splitncnn_5 pixel_decoder_offset_normalizer_splitncnn_6 pixel_decoder_offset_normalizer_splitncnn_7 pixel_decoder_offset_normalizer_splitncnn_8 pixel_decoder_offset_normalizer_splitncnn_9 pixel_decoder_offset_normalizer_splitncnn_10 pixel_decoder_offset_normalizer_splitncnn_11
+MemoryData               pixel_decoder_7124     0 1 pixel_decoder_7124 0=1 1=1 2=256
+MemoryData               pixel_decoder_7125     0 1 pixel_decoder_7125 0=1 1=1 2=256
+MemoryData               pixel_decoder_7126     0 1 pixel_decoder_7126 0=1 1=1 2=256
+MemoryData               pixel_decoder_7127     0 1 pixel_decoder_7127 0=1 1=1 2=256
+MemoryData               pixel_decoder_7128     0 1 pixel_decoder_7128 0=1 1=1 2=256
+MemoryData               pixel_decoder_7129     0 1 pixel_decoder_7129 0=1 1=1 2=256
+Convolution              pixel_decoder_Conv_0   1 1 pixel_decoder_features4 pixel_decoder_307 0=256 1=1 5=1 6=524288
+Convolution              pixel_decoder_Conv_10  1 1 pixel_decoder_features3 pixel_decoder_319 0=256 1=1 5=1 6=262144
+Convolution              pixel_decoder_Conv_20  1 1 pixel_decoder_features2 pixel_decoder_331 0=256 1=1 5=1 6=131072
+Reshape                  pixel_decoder_Reshape_46 1 1 pixel_decoder_pos_em1 pixel_decoder_359 0=-1 1=256 2=1
+Reshape                  pixel_decoder_Reshape_49 1 1 level_embed_2 pixel_decoder_362 0=-1 1=1 2=1
+Reshape                  pixel_decoder_Reshape_67 1 1 pixel_decoder_pos_em2 pixel_decoder_380 0=-1 1=256 2=1
+Reshape                  pixel_decoder_Reshape_70 1 1 level_embed_1 pixel_decoder_383 0=-1 1=1 2=1
+Reshape                  pixel_decoder_Reshape_88 1 1 pixel_decoder_pos_em3 pixel_decoder_401 0=-1 1=256 2=1
+Reshape                  pixel_decoder_Reshape_91 1 1 level_embed_0 pixel_decoder_404 0=-1 1=1 2=1
+Crop                     pixel_decoder_Slice_148 1 1 pixel_decoder_offset_normalizer_splitncnn_11 pixel_decoder_478 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_157 1 1 pixel_decoder_offset_normalizer_splitncnn_10 pixel_decoder_487 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_166 1 1 pixel_decoder_reference_points_splitncnn_11 pixel_decoder_496 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_173 1 1 pixel_decoder_reference_points_splitncnn_10 pixel_decoder_503 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_1130 1 1 pixel_decoder_offset_normalizer_splitncnn_9 pixel_decoder_1597 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_1139 1 1 pixel_decoder_offset_normalizer_splitncnn_8 pixel_decoder_1606 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_1148 1 1 pixel_decoder_reference_points_splitncnn_9 pixel_decoder_1615 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_1155 1 1 pixel_decoder_reference_points_splitncnn_8 pixel_decoder_1622 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_2112 1 1 pixel_decoder_offset_normalizer_splitncnn_7 pixel_decoder_2716 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_2121 1 1 pixel_decoder_offset_normalizer_splitncnn_6 pixel_decoder_2725 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_2130 1 1 pixel_decoder_reference_points_splitncnn_7 pixel_decoder_2734 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_2137 1 1 pixel_decoder_reference_points_splitncnn_6 pixel_decoder_2741 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_3094 1 1 pixel_decoder_offset_normalizer_splitncnn_5 pixel_decoder_3835 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_3103 1 1 pixel_decoder_offset_normalizer_splitncnn_4 pixel_decoder_3844 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_3112 1 1 pixel_decoder_reference_points_splitncnn_5 pixel_decoder_3853 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_3119 1 1 pixel_decoder_reference_points_splitncnn_4 pixel_decoder_3860 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_4076 1 1 pixel_decoder_offset_normalizer_splitncnn_3 pixel_decoder_4954 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_4085 1 1 pixel_decoder_offset_normalizer_splitncnn_2 pixel_decoder_4963 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_4094 1 1 pixel_decoder_reference_points_splitncnn_3 pixel_decoder_4972 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_4101 1 1 pixel_decoder_reference_points_splitncnn_2 pixel_decoder_4979 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_5058 1 1 pixel_decoder_offset_normalizer_splitncnn_1 pixel_decoder_6073 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_5067 1 1 pixel_decoder_offset_normalizer_splitncnn_0 pixel_decoder_6082 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Crop                     pixel_decoder_Slice_5076 1 1 pixel_decoder_reference_points_splitncnn_1 pixel_decoder_6091 -23309=1,0 -23310=1,1 -23311=1,3
+Crop                     pixel_decoder_Slice_5083 1 1 pixel_decoder_reference_points_splitncnn_0 pixel_decoder_6098 -23309=1,1 -23310=1,2147483647 -23311=1,3
+Reshape                  pixel_decoder_Reshape_2 1 1 pixel_decoder_307 pixel_decoder_309 0=-1 1=1 2=32
+Reshape                  pixel_decoder_Reshape_12 1 1 pixel_decoder_319 pixel_decoder_321 0=-1 1=1 2=32
+Reshape                  pixel_decoder_Reshape_22 1 1 pixel_decoder_331 pixel_decoder_333 0=-1 1=1 2=32
+Permute                  pixel_decoder_Transpose_47 1 1 pixel_decoder_359 pixel_decoder_360 0=1
+Permute                  pixel_decoder_Transpose_68 1 1 pixel_decoder_380 pixel_decoder_381 0=1
+Permute                  pixel_decoder_Transpose_89 1 1 pixel_decoder_401 pixel_decoder_402 0=1
+Reshape                  pixel_decoder_Reshape_150 1 1 pixel_decoder_478 pixel_decoder_480 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_159 1 1 pixel_decoder_487 pixel_decoder_489 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_168 1 1 pixel_decoder_496 pixel_decoder_498 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_175 1 1 pixel_decoder_503 pixel_decoder_505 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_1132 1 1 pixel_decoder_1597 pixel_decoder_1599 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_1141 1 1 pixel_decoder_1606 pixel_decoder_1608 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_1150 1 1 pixel_decoder_1615 pixel_decoder_1617 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_1157 1 1 pixel_decoder_1622 pixel_decoder_1624 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_2114 1 1 pixel_decoder_2716 pixel_decoder_2718 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_2123 1 1 pixel_decoder_2725 pixel_decoder_2727 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_2132 1 1 pixel_decoder_2734 pixel_decoder_2736 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_2139 1 1 pixel_decoder_2741 pixel_decoder_2743 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_3096 1 1 pixel_decoder_3835 pixel_decoder_3837 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_3105 1 1 pixel_decoder_3844 pixel_decoder_3846 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_3114 1 1 pixel_decoder_3853 pixel_decoder_3855 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_3121 1 1 pixel_decoder_3860 pixel_decoder_3862 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_4078 1 1 pixel_decoder_4954 pixel_decoder_4956 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_4087 1 1 pixel_decoder_4963 pixel_decoder_4965 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_4096 1 1 pixel_decoder_4972 pixel_decoder_4974 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_4103 1 1 pixel_decoder_4979 pixel_decoder_4981 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_5060 1 1 pixel_decoder_6073 pixel_decoder_6075 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_5069 1 1 pixel_decoder_6082 pixel_decoder_6084 0=1 1=3 2=1 11=1
+Reshape                  pixel_decoder_Reshape_5078 1 1 pixel_decoder_6091 pixel_decoder_6093 0=1 1=3 2=-1 11=1
+Reshape                  pixel_decoder_Reshape_5085 1 1 pixel_decoder_6098 pixel_decoder_6100 0=1 1=3 2=-1 11=1
+InstanceNorm             pixel_decoder_InstanceNormalization_5 1 1 pixel_decoder_309 pixel_decoder_312 0=32 1=1.000000e-05 2=0
+InstanceNorm             pixel_decoder_InstanceNormalization_15 1 1 pixel_decoder_321 pixel_decoder_324 0=32 1=1.000000e-05 2=0
+InstanceNorm             pixel_decoder_InstanceNormalization_25 1 1 pixel_decoder_333 pixel_decoder_336 0=32 1=1.000000e-05 2=0
+BinaryOp                 pixel_decoder_Add_50   2 1 pixel_decoder_360 pixel_decoder_362 pixel_decoder_363
+BinaryOp                 pixel_decoder_Add_71   2 1 pixel_decoder_381 pixel_decoder_383 pixel_decoder_384
+BinaryOp                 pixel_decoder_Add_92   2 1 pixel_decoder_402 pixel_decoder_404 pixel_decoder_405
+Reshape                  pixel_decoder_Reshape_7 1 1 pixel_decoder_312 pixel_decoder_314 0=-1 1=25 2=256
+Reshape                  pixel_decoder_Reshape_17 1 1 pixel_decoder_324 pixel_decoder_326 0=-1 1=50 2=256
+Reshape                  pixel_decoder_Reshape_27 1 1 pixel_decoder_336 pixel_decoder_338 0=-1 1=100 2=256
+Concat                   pixel_decoder_Concat_94 3 1 pixel_decoder_363 pixel_decoder_384 pixel_decoder_405 pixel_decoder_407 0=1
+Split                    pixel_decoder_splitncnn_0 1 6 pixel_decoder_407 pixel_decoder_407_splitncnn_0 pixel_decoder_407_splitncnn_1 pixel_decoder_407_splitncnn_2 pixel_decoder_407_splitncnn_3 pixel_decoder_407_splitncnn_4 pixel_decoder_407_splitncnn_5
+BinaryOp                 pixel_decoder_Mul_8    2 1 pixel_decoder_314 pixel_decoder_7124 pixel_decoder_316 0=2
+BinaryOp                 pixel_decoder_Mul_18   2 1 pixel_decoder_326 pixel_decoder_7126 pixel_decoder_328 0=2
+BinaryOp                 pixel_decoder_Mul_28   2 1 pixel_decoder_338 pixel_decoder_7128 pixel_decoder_340 0=2
+BinaryOp                 pixel_decoder_Add_9    2 1 pixel_decoder_316 pixel_decoder_7125 pixel_decoder_318
+BinaryOp                 pixel_decoder_Add_19   2 1 pixel_decoder_328 pixel_decoder_7127 pixel_decoder_330
+BinaryOp                 pixel_decoder_Add_29   2 1 pixel_decoder_340 pixel_decoder_7129 pixel_decoder_342
+Reshape                  pixel_decoder_Reshape_37 1 1 pixel_decoder_318 pixel_decoder_350 0=-1 1=256 2=1
+Reshape                  pixel_decoder_Reshape_58 1 1 pixel_decoder_330 pixel_decoder_371 0=-1 1=256 2=1
+Reshape                  pixel_decoder_Reshape_79 1 1 pixel_decoder_342 pixel_decoder_392 0=-1 1=256 2=1
+Permute                  pixel_decoder_Transpose_38 1 1 pixel_decoder_350 pixel_decoder_351 0=1
+Permute                  pixel_decoder_Transpose_59 1 1 pixel_decoder_371 pixel_decoder_372 0=1
+Permute                  pixel_decoder_Transpose_80 1 1 pixel_decoder_392 pixel_decoder_393 0=1
+Concat                   pixel_decoder_Concat_93 3 1 pixel_decoder_351 pixel_decoder_372 pixel_decoder_393 pixel_decoder_406 0=1
+Split                    pixel_decoder_splitncnn_1 1 3 pixel_decoder_406 pixel_decoder_406_splitncnn_0 pixel_decoder_406_splitncnn_1 pixel_decoder_406_splitncnn_2
+BinaryOp                 pixel_decoder_Add_95   2 1 pixel_decoder_406_splitncnn_2 pixel_decoder_407_splitncnn_5 pixel_decoder_408
+Split                    pixel_decoder_splitncnn_2 1 2 pixel_decoder_408 pixel_decoder_408_splitncnn_0 pixel_decoder_408_splitncnn_1
+Reshape                  pixel_decoder_Reshape_10000 1 1 pixel_decoder_406_splitncnn_1 pixel_decoder_10000 0=256 1=-1
+InnerProduct             pixel_decoder_MatMul_105 1 1 pixel_decoder_10000 pixel_decoder_420 0=256 1=1 2=65536
+Reshape                  pixel_decoder_Reshape_10002 1 1 pixel_decoder_408_splitncnn_1 pixel_decoder_10002 0=256 1=-1
+InnerProduct             pixel_decoder_MatMul_111 1 1 pixel_decoder_10002 pixel_decoder_431 0=96 1=1 2=24576
+Reshape                  pixel_decoder_Reshape_10004 1 1 pixel_decoder_408_splitncnn_0 pixel_decoder_10004 0=256 1=-1
+InnerProduct             pixel_decoder_MatMul_122 1 1 pixel_decoder_10004 pixel_decoder_453 0=192 1=1 2=49152
+Reshape                  pixel_decoder_Reshape_110 1 1 pixel_decoder_420 pixel_decoder_428 0=32 1=8 2=-1
+Reshape                  pixel_decoder_Reshape_116 1 1 pixel_decoder_431 pixel_decoder_439 0=12 1=8 2=-1
+Reshape                  pixel_decoder_Reshape_125 1 1 pixel_decoder_453 pixel_decoder_455 0=2 1=96 2=-1
+Split                    pixel_decoder_splitncnn_3 1 2 pixel_decoder_455 pixel_decoder_455_splitncnn_0 pixel_decoder_455_splitncnn_1
+Softmax                  pixel_decoder_Softmax_117 1 1 pixel_decoder_439 pixel_decoder_440 0=2 1=1
+Reshape                  pixel_decoder_Reshape_10006 1 1 pixel_decoder_440 pixel_decoder_10006 0=12 1=8 2=1 11=-1
+Crop                     pixel_decoder_Slice_130 1 1 pixel_decoder_455_splitncnn_1 pixel_decoder_460 -23309=1,0 -23310=1,1 -23311=1,2
+Crop                     pixel_decoder_Slice_135 1 1 pixel_decoder_455_splitncnn_0 pixel_decoder_465 -23309=1,1 -23310=1,2147483647 -23311=1,2
+Reshape                  pixel_decoder_Reshape_121 1 1 pixel_decoder_10006 pixel_decoder_450 0=4 1=3 2=-1 11=8
+Reshape                  pixel_decoder_Reshape_137 1 1 pixel_decoder_460 pixel_decoder_467 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20000 1 1 pixel_decoder_467 pixel_decoder_20000 0=6
+Reshape                  pixel_decoder_Reshape_141 1 1 pixel_decoder_465 pixel_decoder_471 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20001 1 1 pixel_decoder_471 pixel_decoder_20001 0=6
+Reshape                  pixel_decoder_Reshape_139 1 1 pixel_decoder_20000 pixel_decoder_469 0=4 1=3 2=-1 11=8
+Reshape                  pixel_decoder_Reshape_143 1 1 pixel_decoder_20001 pixel_decoder_473 0=4 1=3 2=-1 11=8
+BinaryOp                 pixel_decoder_Div_152  2 1 pixel_decoder_469 pixel_decoder_480 pixel_decoder_482 0=3
+BinaryOp                 pixel_decoder_Div_161  2 1 pixel_decoder_473 pixel_decoder_489 pixel_decoder_491 0=3
+BinaryOp                 pixel_decoder_Add_176  2 1 pixel_decoder_482 pixel_decoder_498 pixel_decoder_506
+BinaryOp                 pixel_decoder_Add_177  2 1 pixel_decoder_491 pixel_decoder_505 pixel_decoder_507
+ms_attn                  pixel_decoder_ms_attn1 5 1 pixel_decoder_spatial_shapes_splitncnn_5 pixel_decoder_428 pixel_decoder_450 pixel_decoder_506 pixel_decoder_507 pixel_decoder_1492
+InnerProduct             pixel_decoder_MatMul_1046 1 1 pixel_decoder_1492 pixel_decoder_1495 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_1048 2 1 pixel_decoder_406_splitncnn_0 pixel_decoder_1495 pixel_decoder_1496
+LayerNorm                pixel_decoder_LayerNormN-0 1 1 pixel_decoder_1496 pixel_decoder_1507 0=256 1=1.000000e-05
+Reshape                  pixel_decoder_Reshape_10007 1 1 pixel_decoder_1507 pixel_decoder_10007 0=256 1=-1
+Split                    pixel_decoder_splitncnn_4 1 2 pixel_decoder_10007 pixel_decoder_1507_splitncnn_0 pixel_decoder_1507_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_1060 1 1 pixel_decoder_1507_splitncnn_1 pixel_decoder_1511 0=1024 1=1 2=262144 9=1
+InnerProduct             pixel_decoder_MatMul_1063 1 1 pixel_decoder_1511 pixel_decoder_1514 0=256 1=1 2=262144
+BinaryOp                 pixel_decoder_Add_1065 2 1 pixel_decoder_1514 pixel_decoder_1507_splitncnn_0 pixel_decoder_1515
+LayerNorm                pixel_decoder_LayerNormN-1 1 1 pixel_decoder_1515 pixel_decoder_1526 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_5 1 3 pixel_decoder_1526 pixel_decoder_1526_splitncnn_0 pixel_decoder_1526_splitncnn_1 pixel_decoder_1526_splitncnn_2
+InnerProduct             pixel_decoder_MatMul_1087 1 1 pixel_decoder_1526_splitncnn_2 pixel_decoder_1539 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_1077 2 1 pixel_decoder_407_splitncnn_4 pixel_decoder_1526_splitncnn_1 pixel_decoder_1527
+Reshape                  pixel_decoder_Reshape_10008 1 1 pixel_decoder_1527 pixel_decoder_10008 0=256 1=-1
+Split                    pixel_decoder_splitncnn_6 1 2 pixel_decoder_10008 pixel_decoder_1527_splitncnn_0 pixel_decoder_1527_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_1104 1 1 pixel_decoder_1527_splitncnn_1 pixel_decoder_1572 0=192 1=1 2=49152
+Reshape                  pixel_decoder_Reshape_1092 1 1 pixel_decoder_1539 pixel_decoder_1547 0=32 1=8 2=-1
+InnerProduct             pixel_decoder_MatMul_1093 1 1 pixel_decoder_1527_splitncnn_0 pixel_decoder_1550 0=96 1=1 2=24576
+Reshape                  pixel_decoder_Reshape_1107 1 1 pixel_decoder_1572 pixel_decoder_1574 0=2 1=96 2=-1
+Split                    pixel_decoder_splitncnn_7 1 2 pixel_decoder_1574 pixel_decoder_1574_splitncnn_0 pixel_decoder_1574_splitncnn_1
+Reshape                  pixel_decoder_Reshape_1098 1 1 pixel_decoder_1550 pixel_decoder_1558 0=12 1=8 2=-1
+Crop                     pixel_decoder_Slice_1112 1 1 pixel_decoder_1574_splitncnn_1 pixel_decoder_1579 -23309=1,0 -23310=1,1 -23311=1,2
+Crop                     pixel_decoder_Slice_1117 1 1 pixel_decoder_1574_splitncnn_0 pixel_decoder_1584 -23309=1,1 -23310=1,2147483647 -23311=1,2
+Softmax                  pixel_decoder_Softmax_1099 1 1 pixel_decoder_1558 pixel_decoder_1559 0=2 1=1
+Reshape                  pixel_decoder_Reshape_1119 1 1 pixel_decoder_1579 pixel_decoder_1586 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20002 1 1 pixel_decoder_1586 pixel_decoder_20002 0=6
+Reshape                  pixel_decoder_Reshape_1123 1 1 pixel_decoder_1584 pixel_decoder_1590 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20003 1 1 pixel_decoder_1590 pixel_decoder_20003 0=6
+Reshape                  pixel_decoder_Reshape_1121 1 1 pixel_decoder_20002 pixel_decoder_1588 0=4 1=3 2=-1 11=8
+Reshape                  pixel_decoder_Reshape_1125 1 1 pixel_decoder_20003 pixel_decoder_1592 0=4 1=3 2=-1 11=8
+BinaryOp                 pixel_decoder_Div_1134 2 1 pixel_decoder_1588 pixel_decoder_1599 pixel_decoder_1601 0=3
+BinaryOp                 pixel_decoder_Div_1143 2 1 pixel_decoder_1592 pixel_decoder_1608 pixel_decoder_1610 0=3
+BinaryOp                 pixel_decoder_Add_1158 2 1 pixel_decoder_1601 pixel_decoder_1617 pixel_decoder_1625
+BinaryOp                 pixel_decoder_Add_1159 2 1 pixel_decoder_1610 pixel_decoder_1624 pixel_decoder_1626
+Reshape                  pixel_decoder_Reshape_10009 1 1 pixel_decoder_1559 pixel_decoder_10009 0=12 1=8 2=1 11=-1
+Reshape                  pixel_decoder_Reshape_1103 1 1 pixel_decoder_10009 pixel_decoder_1569 0=4 1=3 2=-1 11=8
+ms_attn                  pixel_decoder_ms_attn2 5 1 pixel_decoder_spatial_shapes_splitncnn_4 pixel_decoder_1547 pixel_decoder_1569 pixel_decoder_1625 pixel_decoder_1626 pixel_decoder_2611
+InnerProduct             pixel_decoder_MatMul_2028 1 1 pixel_decoder_2611 pixel_decoder_2614 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_2030 2 1 pixel_decoder_1526_splitncnn_0 pixel_decoder_2614 pixel_decoder_2615
+LayerNorm                pixel_decoder_LayerNormN-2 1 1 pixel_decoder_2615 pixel_decoder_2626 0=256 1=1.000000e-05
+Reshape                  pixel_decoder_Reshape_10012 1 1 pixel_decoder_2626 pixel_decoder_10012 0=256 1=-1
+Split                    pixel_decoder_splitncnn_8 1 2 pixel_decoder_10012 pixel_decoder_2626_splitncnn_0 pixel_decoder_2626_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_2042 1 1 pixel_decoder_2626_splitncnn_1 pixel_decoder_2630 0=1024 1=1 2=262144 9=1
+InnerProduct             pixel_decoder_MatMul_2045 1 1 pixel_decoder_2630 pixel_decoder_2633 0=256 1=1 2=262144
+BinaryOp                 pixel_decoder_Add_2047 2 1 pixel_decoder_2626_splitncnn_0 pixel_decoder_2633 pixel_decoder_2634
+LayerNorm                pixel_decoder_LayerNormN-3 1 1 pixel_decoder_2634 pixel_decoder_2645 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_9 1 3 pixel_decoder_2645 pixel_decoder_2645_splitncnn_0 pixel_decoder_2645_splitncnn_1 pixel_decoder_2645_splitncnn_2
+InnerProduct             pixel_decoder_MatMul_2069 1 1 pixel_decoder_2645_splitncnn_2 pixel_decoder_2658 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_2059 2 1 pixel_decoder_407_splitncnn_3 pixel_decoder_2645_splitncnn_1 pixel_decoder_2646
+Reshape                  pixel_decoder_Reshape_10010 1 1 pixel_decoder_2646 pixel_decoder_10010 0=256 1=-1
+Split                    pixel_decoder_splitncnn_10 1 2 pixel_decoder_10010 pixel_decoder_2646_splitncnn_0 pixel_decoder_2646_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_2086 1 1 pixel_decoder_2646_splitncnn_1 pixel_decoder_2691 0=192 1=1 2=49152
+InnerProduct             pixel_decoder_MatMul_2075 1 1 pixel_decoder_2646_splitncnn_0 pixel_decoder_2669 0=96 1=1 2=24576
+Reshape                  pixel_decoder_Reshape_2089 1 1 pixel_decoder_2691 pixel_decoder_2693 0=2 1=96 2=-1
+Split                    pixel_decoder_splitncnn_11 1 2 pixel_decoder_2693 pixel_decoder_2693_splitncnn_0 pixel_decoder_2693_splitncnn_1
+Reshape                  pixel_decoder_Reshape_2080 1 1 pixel_decoder_2669 pixel_decoder_2677 0=12 1=8 2=-1
+Crop                     pixel_decoder_Slice_2094 1 1 pixel_decoder_2693_splitncnn_1 pixel_decoder_2698 -23309=1,0 -23310=1,1 -23311=1,2
+Crop                     pixel_decoder_Slice_2099 1 1 pixel_decoder_2693_splitncnn_0 pixel_decoder_2703 -23309=1,1 -23310=1,2147483647 -23311=1,2
+Softmax                  pixel_decoder_Softmax_2081 1 1 pixel_decoder_2677 pixel_decoder_2678 0=2 1=1
+Reshape                  pixel_decoder_Reshape_2101 1 1 pixel_decoder_2698 pixel_decoder_2705 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20004 1 1 pixel_decoder_2705 pixel_decoder_20004 0=6
+Reshape                  pixel_decoder_Reshape_2105 1 1 pixel_decoder_2703 pixel_decoder_2709 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20005 1 1 pixel_decoder_2709 pixel_decoder_20005 0=6
+Reshape                  pixel_decoder_Reshape_2103 1 1 pixel_decoder_20004 pixel_decoder_2707 0=4 1=3 2=-1 11=8
+Reshape                  pixel_decoder_Reshape_2107 1 1 pixel_decoder_20005 pixel_decoder_2711 0=4 1=3 2=-1 11=8
+BinaryOp                 pixel_decoder_Div_2116 2 1 pixel_decoder_2707 pixel_decoder_2718 pixel_decoder_2720 0=3
+BinaryOp                 pixel_decoder_Div_2125 2 1 pixel_decoder_2711 pixel_decoder_2727 pixel_decoder_2729 0=3
+BinaryOp                 pixel_decoder_Add_2140 2 1 pixel_decoder_2720 pixel_decoder_2736 pixel_decoder_2744
+BinaryOp                 pixel_decoder_Add_2141 2 1 pixel_decoder_2729 pixel_decoder_2743 pixel_decoder_2745
+Reshape                  pixel_decoder_Reshape_2074 1 1 pixel_decoder_2658 pixel_decoder_2666 0=32 1=8 2=-1
+Reshape                  pixel_decoder_Reshape_10011 1 1 pixel_decoder_2678 pixel_decoder_10011 0=12 1=8 2=1 11=-1
+Reshape                  pixel_decoder_Reshape_2085 1 1 pixel_decoder_10011 pixel_decoder_2688 0=4 1=3 2=-1 11=8
+ms_attn                  pixel_decoder_ms_attn3 5 1 pixel_decoder_spatial_shapes_splitncnn_3 pixel_decoder_2666 pixel_decoder_2688 pixel_decoder_2744 pixel_decoder_2745 pixel_decoder_3730
+InnerProduct             pixel_decoder_MatMul_3010 1 1 pixel_decoder_3730 pixel_decoder_3733 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_3012 2 1 pixel_decoder_2645_splitncnn_0 pixel_decoder_3733 pixel_decoder_3734
+LayerNorm                pixel_decoder_LayerNormN-4 1 1 pixel_decoder_3734 pixel_decoder_3745 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_12 1 2 pixel_decoder_3745 pixel_decoder_3745_splitncnn_0 pixel_decoder_3745_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_3024 1 1 pixel_decoder_3745_splitncnn_1 pixel_decoder_3749 0=1024 1=1 2=262144 9=1
+InnerProduct             pixel_decoder_MatMul_3027 1 1 pixel_decoder_3749 pixel_decoder_3752 0=256 1=1 2=262144
+BinaryOp                 pixel_decoder_Add_3029 2 1 pixel_decoder_3745_splitncnn_0 pixel_decoder_3752 pixel_decoder_3753
+LayerNorm                pixel_decoder_LayerNormN-5 1 1 pixel_decoder_3753 pixel_decoder_3764 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_13 1 3 pixel_decoder_3764 pixel_decoder_3764_splitncnn_0 pixel_decoder_3764_splitncnn_1 pixel_decoder_3764_splitncnn_2
+BinaryOp                 pixel_decoder_Add_3041 2 1 pixel_decoder_407_splitncnn_2 pixel_decoder_3764_splitncnn_2 pixel_decoder_3765
+Reshape                  pixel_decoder_Reshape_10013 1 1 pixel_decoder_3765 pixel_decoder_10013 0=256 1=-1
+Split                    pixel_decoder_splitncnn_14 1 2 pixel_decoder_10013 pixel_decoder_3765_splitncnn_0 pixel_decoder_3765_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_3068 1 1 pixel_decoder_3765_splitncnn_1 pixel_decoder_3810 0=192 1=1 2=49152
+InnerProduct             pixel_decoder_MatMul_3051 1 1 pixel_decoder_3764_splitncnn_1 pixel_decoder_3777 0=256 1=1 2=65536
+InnerProduct             pixel_decoder_MatMul_3057 1 1 pixel_decoder_3765_splitncnn_0 pixel_decoder_3788 0=96 1=1 2=24576
+Reshape                  pixel_decoder_Reshape_3071 1 1 pixel_decoder_3810 pixel_decoder_3812 0=2 1=96 2=-1
+Split                    pixel_decoder_splitncnn_15 1 2 pixel_decoder_3812 pixel_decoder_3812_splitncnn_0 pixel_decoder_3812_splitncnn_1
+Reshape                  pixel_decoder_Reshape_3062 1 1 pixel_decoder_3788 pixel_decoder_3796 0=12 1=8 2=-1
+Crop                     pixel_decoder_Slice_3076 1 1 pixel_decoder_3812_splitncnn_1 pixel_decoder_3817 -23309=1,0 -23310=1,1 -23311=1,2
+Crop                     pixel_decoder_Slice_3081 1 1 pixel_decoder_3812_splitncnn_0 pixel_decoder_3822 -23309=1,1 -23310=1,2147483647 -23311=1,2
+Softmax                  pixel_decoder_Softmax_3063 1 1 pixel_decoder_3796 pixel_decoder_3797 0=2 1=1
+Reshape                  pixel_decoder_Reshape_3083 1 1 pixel_decoder_3817 pixel_decoder_3824 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20006 1 1 pixel_decoder_3824 pixel_decoder_20006 0=6
+Reshape                  pixel_decoder_Reshape_3087 1 1 pixel_decoder_3822 pixel_decoder_3828 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20007 1 1 pixel_decoder_3828 pixel_decoder_20007 0=6
+Reshape                  pixel_decoder_Reshape_3085 1 1 pixel_decoder_20006 pixel_decoder_3826 0=4 1=3 2=-1 11=8
+Reshape                  pixel_decoder_Reshape_3089 1 1 pixel_decoder_20007 pixel_decoder_3830 0=4 1=3 2=-1 11=8
+BinaryOp                 pixel_decoder_Div_3098 2 1 pixel_decoder_3826 pixel_decoder_3837 pixel_decoder_3839 0=3
+BinaryOp                 pixel_decoder_Div_3107 2 1 pixel_decoder_3830 pixel_decoder_3846 pixel_decoder_3848 0=3
+BinaryOp                 pixel_decoder_Add_3122 2 1 pixel_decoder_3839 pixel_decoder_3855 pixel_decoder_3863
+BinaryOp                 pixel_decoder_Add_3123 2 1 pixel_decoder_3848 pixel_decoder_3862 pixel_decoder_3864
+Reshape                  pixel_decoder_Reshape_3056 1 1 pixel_decoder_3777 pixel_decoder_3785 0=32 1=8 2=-1
+Reshape                  pixel_decoder_Reshape_10014 1 1 pixel_decoder_3797 pixel_decoder_10014 0=12 1=8 2=1 11=-1
+Reshape                  pixel_decoder_Reshape_3067 1 1 pixel_decoder_10014 pixel_decoder_3807 0=4 1=3 2=-1 11=8
+ms_attn                  pixel_decoder_ms_attn4 5 1 pixel_decoder_spatial_shapes_splitncnn_2 pixel_decoder_3785 pixel_decoder_3807 pixel_decoder_3863 pixel_decoder_3864 pixel_decoder_4849
+InnerProduct             pixel_decoder_MatMul_3992 1 1 pixel_decoder_4849 pixel_decoder_4852 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_3994 2 1 pixel_decoder_3764_splitncnn_0 pixel_decoder_4852 pixel_decoder_4853
+LayerNorm                pixel_decoder_LayerNormN-6 1 1 pixel_decoder_4853 pixel_decoder_4864 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_16 1 2 pixel_decoder_4864 pixel_decoder_4864_splitncnn_0 pixel_decoder_4864_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_4006 1 1 pixel_decoder_4864_splitncnn_1 pixel_decoder_4868 0=1024 1=1 2=262144 9=1
+InnerProduct             pixel_decoder_MatMul_4009 1 1 pixel_decoder_4868 pixel_decoder_4871 0=256 1=1 2=262144
+BinaryOp                 pixel_decoder_Add_4011 2 1 pixel_decoder_4864_splitncnn_0 pixel_decoder_4871 pixel_decoder_4872
+LayerNorm                pixel_decoder_LayerNormN-7 1 1 pixel_decoder_4872 pixel_decoder_4883 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_17 1 3 pixel_decoder_4883 pixel_decoder_4883_splitncnn_0 pixel_decoder_4883_splitncnn_1 pixel_decoder_4883_splitncnn_2
+BinaryOp                 pixel_decoder_Add_4023 2 1 pixel_decoder_407_splitncnn_1 pixel_decoder_4883_splitncnn_2 pixel_decoder_4884
+Reshape                  pixel_decoder_Reshape_10015 1 1 pixel_decoder_4884 pixel_decoder_10015 0=256 1=-1
+Split                    pixel_decoder_splitncnn_18 1 2 pixel_decoder_10015 pixel_decoder_4884_splitncnn_0 pixel_decoder_4884_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_4033 1 1 pixel_decoder_4883_splitncnn_1 pixel_decoder_4896 0=256 1=1 2=65536
+InnerProduct             pixel_decoder_MatMul_4039 1 1 pixel_decoder_4884_splitncnn_1 pixel_decoder_4907 0=96 1=1 2=24576
+InnerProduct             pixel_decoder_MatMul_4050 1 1 pixel_decoder_4884_splitncnn_0 pixel_decoder_4929 0=192 1=1 2=49152
+Reshape                  pixel_decoder_Reshape_4044 1 1 pixel_decoder_4907 pixel_decoder_4915 0=12 1=8 2=-1
+Reshape                  pixel_decoder_Reshape_4053 1 1 pixel_decoder_4929 pixel_decoder_4931 0=2 1=96 2=-1
+Split                    pixel_decoder_splitncnn_19 1 2 pixel_decoder_4931 pixel_decoder_4931_splitncnn_0 pixel_decoder_4931_splitncnn_1
+Crop                     pixel_decoder_Slice_4063 1 1 pixel_decoder_4931_splitncnn_1 pixel_decoder_4941 -23309=1,1 -23310=1,2147483647 -23311=1,2
+Softmax                  pixel_decoder_Softmax_4045 1 1 pixel_decoder_4915 pixel_decoder_4916 0=2 1=1
+Crop                     pixel_decoder_Slice_4058 1 1 pixel_decoder_4931_splitncnn_0 pixel_decoder_4936 -23309=1,0 -23310=1,1 -23311=1,2
+Reshape                  pixel_decoder_Reshape_4069 1 1 pixel_decoder_4941 pixel_decoder_4947 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20008 1 1 pixel_decoder_4947 pixel_decoder_20008 0=6
+Reshape                  pixel_decoder_Reshape_4065 1 1 pixel_decoder_4936 pixel_decoder_4943 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20009 1 1 pixel_decoder_4943 pixel_decoder_20009 0=6
+Reshape                  pixel_decoder_Reshape_4071 1 1 pixel_decoder_20008 pixel_decoder_4949 0=4 1=3 2=-1 11=8
+Reshape                  pixel_decoder_Reshape_4067 1 1 pixel_decoder_20009 pixel_decoder_4945 0=4 1=3 2=-1 11=8
+BinaryOp                 pixel_decoder_Div_4089 2 1 pixel_decoder_4949 pixel_decoder_4965 pixel_decoder_4967 0=3
+BinaryOp                 pixel_decoder_Div_4080 2 1 pixel_decoder_4945 pixel_decoder_4956 pixel_decoder_4958 0=3
+BinaryOp                 pixel_decoder_Add_4105 2 1 pixel_decoder_4967 pixel_decoder_4981 pixel_decoder_4983
+Reshape                  pixel_decoder_Reshape_4038 1 1 pixel_decoder_4896 pixel_decoder_4904 0=32 1=8 2=-1
+Reshape                  pixel_decoder_Reshape_10016 1 1 pixel_decoder_4916 pixel_decoder_10016 0=12 1=8 2=1 11=-1
+Reshape                  pixel_decoder_Reshape_4049 1 1 pixel_decoder_10016 pixel_decoder_4926 0=4 1=3 2=-1 11=8
+BinaryOp                 pixel_decoder_Add_4104 2 1 pixel_decoder_4958 pixel_decoder_4974 pixel_decoder_4982
+ms_attn                  pixel_decoder_ms_attn5 5 1 pixel_decoder_spatial_shapes_splitncnn_1 pixel_decoder_4904 pixel_decoder_4926 pixel_decoder_4982 pixel_decoder_4983 pixel_decoder_5968
+InnerProduct             pixel_decoder_MatMul_4974 1 1 pixel_decoder_5968 pixel_decoder_5971 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_4976 2 1 pixel_decoder_4883_splitncnn_0 pixel_decoder_5971 pixel_decoder_5972
+LayerNorm                pixel_decoder_LayerNormN-8 1 1 pixel_decoder_5972 pixel_decoder_5983 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_20 1 2 pixel_decoder_5983 pixel_decoder_5983_splitncnn_0 pixel_decoder_5983_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_4988 1 1 pixel_decoder_5983_splitncnn_1 pixel_decoder_5987 0=1024 1=1 2=262144 9=1
+InnerProduct             pixel_decoder_MatMul_4991 1 1 pixel_decoder_5987 pixel_decoder_5990 0=256 1=1 2=262144
+BinaryOp                 pixel_decoder_Add_4993 2 1 pixel_decoder_5983_splitncnn_0 pixel_decoder_5990 pixel_decoder_5991
+LayerNorm                pixel_decoder_LayerNormN-9 1 1 pixel_decoder_5991 pixel_decoder_6002 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_21 1 3 pixel_decoder_6002 pixel_decoder_6002_splitncnn_0 pixel_decoder_6002_splitncnn_1 pixel_decoder_6002_splitncnn_2
+InnerProduct             pixel_decoder_MatMul_5015 1 1 pixel_decoder_6002_splitncnn_2 pixel_decoder_6015 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_5005 2 1 pixel_decoder_407_splitncnn_0 pixel_decoder_6002_splitncnn_1 pixel_decoder_6003
+Reshape                  pixel_decoder_Reshape_10017 1 1 pixel_decoder_6003 pixel_decoder_10017 0=256 1=-1
+Split                    pixel_decoder_splitncnn_22 1 2 pixel_decoder_10017 pixel_decoder_6003_splitncnn_0 pixel_decoder_6003_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_5032 1 1 pixel_decoder_6003_splitncnn_1 pixel_decoder_6048 0=192 1=1 2=49152
+InnerProduct             pixel_decoder_MatMul_5021 1 1 pixel_decoder_6003_splitncnn_0 pixel_decoder_6026 0=96 1=1 2=24576
+Reshape                  pixel_decoder_Reshape_5035 1 1 pixel_decoder_6048 pixel_decoder_6050 0=2 1=96 2=-1
+Split                    pixel_decoder_splitncnn_23 1 2 pixel_decoder_6050 pixel_decoder_6050_splitncnn_0 pixel_decoder_6050_splitncnn_1
+Crop                     pixel_decoder_Slice_5045 1 1 pixel_decoder_6050_splitncnn_1 pixel_decoder_6060 -23309=1,1 -23310=1,2147483647 -23311=1,2
+Reshape                  pixel_decoder_Reshape_5026 1 1 pixel_decoder_6026 pixel_decoder_6034 0=12 1=8 2=-1
+Crop                     pixel_decoder_Slice_5040 1 1 pixel_decoder_6050_splitncnn_0 pixel_decoder_6055 -23309=1,0 -23310=1,1 -23311=1,2
+Reshape                  pixel_decoder_Reshape_5051 1 1 pixel_decoder_6060 pixel_decoder_6066 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20010 1 1 pixel_decoder_6066 pixel_decoder_20010 0=6
+Reshape                  pixel_decoder_Reshape_5047 1 1 pixel_decoder_6055 pixel_decoder_6062 0=4 1=24 2=1 11=-1
+Permute                  pixel_decoder_Transpose_20011 1 1 pixel_decoder_6062 pixel_decoder_20011 0=6
+Reshape                  pixel_decoder_Reshape_5053 1 1 pixel_decoder_20010 pixel_decoder_6068 0=4 1=3 2=-1 11=8
+Reshape                  pixel_decoder_Reshape_5049 1 1 pixel_decoder_20011 pixel_decoder_6064 0=4 1=3 2=-1 11=8
+BinaryOp                 pixel_decoder_Div_5071 2 1 pixel_decoder_6068 pixel_decoder_6084 pixel_decoder_6086 0=3
+BinaryOp                 pixel_decoder_Div_5062 2 1 pixel_decoder_6064 pixel_decoder_6075 pixel_decoder_6077 0=3
+BinaryOp                 pixel_decoder_Add_5087 2 1 pixel_decoder_6086 pixel_decoder_6100 pixel_decoder_6102
+Reshape                  pixel_decoder_Reshape_5020 1 1 pixel_decoder_6015 pixel_decoder_6023 0=32 1=8 2=-1
+Softmax                  pixel_decoder_Softmax_5027 1 1 pixel_decoder_6034 pixel_decoder_6035 0=2 1=1
+Reshape                  pixel_decoder_Reshape_10018 1 1 pixel_decoder_6035 pixel_decoder_10018 0=12 1=8 2=1 11=-1
+Reshape                  pixel_decoder_Reshape_5031 1 1 pixel_decoder_10018 pixel_decoder_6045 0=4 1=3 2=-1 11=8
+BinaryOp                 pixel_decoder_Add_5086 2 1 pixel_decoder_6077 pixel_decoder_6093 pixel_decoder_6101
+ms_attn                  pixel_decoder_ms_attn6 5 1 pixel_decoder_spatial_shapes_splitncnn_0 pixel_decoder_6023 pixel_decoder_6045 pixel_decoder_6101 pixel_decoder_6102 pixel_decoder_7087
+InnerProduct             pixel_decoder_MatMul_5956 1 1 pixel_decoder_7087 pixel_decoder_7090 0=256 1=1 2=65536
+BinaryOp                 pixel_decoder_Add_5958 2 1 pixel_decoder_6002_splitncnn_0 pixel_decoder_7090 pixel_decoder_7091
+LayerNorm                pixel_decoder_LayerNormN-10 1 1 pixel_decoder_7091 pixel_decoder_7102 0=256 1=1.000000e-05
+Split                    pixel_decoder_splitncnn_24 1 2 pixel_decoder_7102 pixel_decoder_7102_splitncnn_0 pixel_decoder_7102_splitncnn_1
+InnerProduct             pixel_decoder_MatMul_5970 1 1 pixel_decoder_7102_splitncnn_1 pixel_decoder_7106 0=1024 1=1 2=262144 9=1
+InnerProduct             pixel_decoder_MatMul_5973 1 1 pixel_decoder_7106 pixel_decoder_7109 0=256 1=1 2=262144
+BinaryOp                 pixel_decoder_Add_5975 2 1 pixel_decoder_7102_splitncnn_0 pixel_decoder_7109 pixel_decoder_7110
+LayerNorm                pixel_decoder_LayerNormN-11 1 1 pixel_decoder_7110 pixel_decoder_7121 0=256 1=1.000000e-05
+Input                    mask_feature_res2 0 1 mask_feature_res2
+Input                    mask_feature_Reshape_23 0 1 mask_feature_317
+Convolution              mask_feature_Conv_24 1 1 mask_feature_res2 mask_feature_318 0=256 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=0 6=65536
+GroupNorm                mask_feature_Add_33 1 1 mask_feature_318 mask_feature_329 0=32 1=256 2=1.000000e-05 3=1
+Interp                   mask_feature_Resize_52 1 1 mask_feature_317 mask_feature_348 0=2 1=2.000000e+00 2=2.000000e+00 3=0 4=0 6=0
+BinaryOp                 mask_feature_Add_53 2 1 mask_feature_329 mask_feature_348 mask_feature_349 0=0
+Convolution              mask_feature_Conv_54 1 1 mask_feature_349 mask_feature_350 0=256 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=0 6=589824
+GroupNorm                mask_feature_Add_63 1 1 mask_feature_350 mask_feature_361 0=32 1=256 2=1.000000e-05 3=1
+ReLU                     mask_feature_Relu_64 1 1 mask_feature_361 mask_feature_362
+Convolution              mask_feature_Conv_65 1 1 mask_feature_362 mask_feature_363 0=256 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=65536

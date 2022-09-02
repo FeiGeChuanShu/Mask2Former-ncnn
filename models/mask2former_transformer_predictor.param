@@ -1,0 +1,680 @@
+7767517
+678 789    
+MemoryData               predictor_level_embed_359                      0 1 predictor_level_embed_359 0=1 1=256 2=3
+Split                    predictor_level_embed_plevel_embed_splitncnn_input1 1 3 predictor_level_embed_359 predictor_level_embed_plevel_embed_splitncnn_0 predictor_level_embed_plevel_embed_splitncnn_1 predictor_level_embed_plevel_embed_splitncnn_2
+Crop                     predictor_level_embed_Slice_44                 1 1 predictor_level_embed_plevel_embed_splitncnn_2 predictor_level_embed_plevel_embed_2 -23309=1,0 -23310=1,1 -23311=1,0
+Crop                     predictor_level_embed_Slice_94                 1 1 predictor_level_embed_plevel_embed_splitncnn_1 predictor_level_embed_plevel_embed_1 -23309=1,1 -23310=1,2 -23311=1,0
+Crop                     predictor_level_embed_Slice_144                1 1 predictor_level_embed_plevel_embed_splitncnn_0 predictor_level_embed_plevel_embed_0 -23309=1,2 -23310=1,2147483647 -23311=1,0
+MemoryData               query_embed/359          0 1 query_embed/359 0=256 1=1 2=100
+MemoryData               query_feat/359           0 1 query_feat/359 0=256 1=1 2=100
+Split                    head0_splitncnn_input3   1 3 query_feat/359 head1_query_feat_splitncnn_0 head1_query_feat_splitncnn_1 head1_query_feat_splitncnn_2
+Input                    head0_mask_features      0 1 head0_mask_features
+Split                    head0_mask_splitncnn_0   1 10 head0_mask_features head0_mask_features_splitncnn_0 head0_mask_features_splitncnn_1 head0_mask_features_splitncnn_2 head0_mask_features_splitncnn_3 head0_mask_features_splitncnn_4 head0_mask_features_splitncnn_5 head0_mask_features_splitncnn_6 head0_mask_features_splitncnn_7 head0_mask_features_splitncnn_8 head0_mask_features_splitncnn_9
+LayerNorm                head0_LayerNormN-0       1 1 head1_query_feat_splitncnn_2 head0_366 0=256 1=1.000000e-05
+Permute                  head0_Transpose_65       1 1 head0_366 head0_367 0=2
+Reshape                  head0_Reshape_10000      1 1 head0_367 head0_10000 0=256 1=-1
+Split                    head0_splitncnn_0        1 2 head0_10000 head0_367_splitncnn_0 head0_367_splitncnn_1
+InnerProduct             head0_MatMul_67          1 1 head0_367_splitncnn_1 head0_370 0=81 1=1 2=20736
+InnerProduct             head0_MatMul_70          1 1 head0_367_splitncnn_0 head0_374 0=256 1=1 2=65536 9=1
+InnerProduct             head0_MatMul_74          1 1 head0_374 head0_378 0=256 1=1 2=65536 9=1
+InnerProduct             head0_MatMul_78          1 1 head0_378 head0_381 0=256 1=1 2=65536
+MatMul                   head0_Einsum_80          2 1 head0_381 head0_mask_features_splitncnn_0 head0_382 0=0
+Reshape                  head0_Reshape_10001      1 1 head0_382 head0_10001 0=-1 1=200 2=100
+Interp                   head0_Resize_20000       1 1 head0_10001 head0_20000 0=2 1=1.250000e-01 2=1.250000e-01 3=0 4=0 6=0
+Sigmoid                  head0_Sigmoid_0          1 1 head0_20000 head0_20001
+gen_attn                 head0_gen_attn_0         1 1 head0_20001 head0_20002
+Split                    head1_level1_splitncnn_0 1 3 predictor_level_embed_plevel_embed_2 head1_level_embed_weight1_splitncnn_0 head1_level_embed_weight1_splitncnn_1 head1_level_embed_weight1_splitncnn_2
+Input                    head1_pos1               0 1 head1_pos1
+Split                    head1_pos11_splitncnn_0  1 3 head1_pos1 head1_pos1_splitncnn_0 head1_pos1_splitncnn_1 head1_pos1_splitncnn_2
+Split                    head1_splitncnn_input2   1 18 query_embed/359 head1_query_embed_splitncnn_0 head1_query_embed_splitncnn_1 head1_query_embed_splitncnn_2 head1_query_embed_splitncnn_3 head1_query_embed_splitncnn_4 head1_query_embed_splitncnn_5 head1_query_embed_splitncnn_6 head1_query_embed_splitncnn_7 head1_query_embed_splitncnn_8 head1_query_embed_splitncnn_9 head1_query_embed_splitncnn_10 head1_query_embed_splitncnn_11 head1_query_embed_splitncnn_12 head1_query_embed_splitncnn_13 head1_query_embed_splitncnn_14 head1_query_embed_splitncnn_15 head1_query_embed_splitncnn_16 head1_query_embed_splitncnn_17
+Input                    head1_out1               0 1 head1_out1
+Reshape                  head1_Reshape_7          1 1 head1_out1 head1_314 0=-1 1=256 2=1
+Split                    head1_out11_splitncnn_0  1 3 head1_314 head1_out1_splitncnn_0 head1_out1_splitncnn_1 head1_out1_splitncnn_2
+BinaryOp                 head1_Add_10             2 1 head1_query_feat_splitncnn_1 head1_query_embed_splitncnn_1 head1_317
+BinaryOp                 head1_Add_8              2 1 head1_out1_splitncnn_0 head1_level_embed_weight1_splitncnn_0 head1_315
+Reshape                  head1_Reshape_10002      1 1 head1_317 head1_10002 0=-1 1=100
+InnerProduct             head1_MatMul_60          1 1 head1_10002 head1_368 0=256 1=1 2=65536
+Permute                  head1_Transpose_9        1 1 head1_315 head1_316 0=4
+Split                    head1_splitncnn_0        1 2 head1_316 head1_316_splitncnn_0 head1_316_splitncnn_1
+BinaryOp                 head1_Add_11             2 1 head1_316_splitncnn_1 head1_pos1_splitncnn_0 head1_318
+Reshape                  head1_Reshape_10004      1 1 head1_316_splitncnn_0 head1_10004 0=256 1=-1
+InnerProduct             head1_MatMul_66          1 1 head1_10004 head1_374 0=256 1=1 2=65536
+Reshape                  head1_Reshape_74         1 1 head1_368 head1_381 0=32 1=8 2=-1
+Reshape                  head1_Reshape_10003      1 1 head1_318 head1_10003 0=256 1=-1
+InnerProduct             head1_MatMul_63          1 1 head1_10003 head1_371 0=256 1=1 2=65536
+Permute                  head1_Transpose_75       1 1 head1_381 head1_382 0=2
+Reshape                  head1_Reshape_91         1 1 head1_374 head1_398 0=32 1=8 2=-1
+BinaryOp                 head1_Div_94             1 1 head1_382 head1_401 0=3 1=1 2=5.656854e+00
+Reshape                  head1_Reshape_83         1 1 head1_371 head1_390 0=32 1=8 2=-1
+Permute                  head1_Transpose_92       1 1 head1_398 head1_399 0=2
+Permute                  head1_Transpose_95       1 1 head1_390 head1_402 0=3
+MatMul                   head1_MatMul_96          2 1 head1_401 head1_402 head1_403
+BinaryOp                 head1_Add_97             2 1 head1_403 head0_20002 head1_404 0=0
+Softmax                  head1_Softmax_98         1 1 head1_404 head1_405 0=2 1=1
+MatMul                   head1_MatMul_99          2 1 head1_405 head1_399 head1_406
+Permute                  head1_Transpose_100      1 1 head1_406 head1_407 0=2
+Reshape                  head1_Reshape_105        1 1 head1_407 head1_412 0=256 1=-1
+InnerProduct             head1_MatMul_107         1 1 head1_412 head1_415 0=256 1=1 2=65536
+Reshape                  head1_Reshape_10005      1 1 head1_415 head1_10005 0=256 1=1 2=-1
+BinaryOp                 head1_Add_109            2 1 head1_query_feat_splitncnn_0 head1_10005 head1_416
+LayerNorm                head1_LayerNormN-0       1 1 head1_416 head1_427 0=256 1=1.000000e-05
+Split                    head1_splitncnn_1        1 3 head1_427 head1_427_splitncnn_0 head1_427_splitncnn_1 head1_427_splitncnn_2
+BinaryOp                 head1_Add_121            2 1 head1_427_splitncnn_2 head1_query_embed_splitncnn_0 head1_428
+Reshape                  head1_Reshape_10007      1 1 head1_428 head1_10007 0=256 1=-1
+Split                    head1_splitncnn_2        1 2 head1_10007 head1_428_splitncnn_0 head1_428_splitncnn_1
+Reshape                  head1_Reshape_10008      1 1 head1_427_splitncnn_1 head1_10008 0=256 1=-1
+InnerProduct             head1_MatMul_176         1 1 head1_10008 head1_484 0=256 1=1 2=65536
+InnerProduct             head1_MatMul_170         1 1 head1_428_splitncnn_1 head1_478 0=256 1=1 2=65536
+InnerProduct             head1_MatMul_173         1 1 head1_428_splitncnn_0 head1_481 0=256 1=1 2=65536
+Reshape                  head1_Reshape_201        1 1 head1_484 head1_508 0=32 1=8 2=-1
+Reshape                  head1_Reshape_184        1 1 head1_478 head1_491 0=32 1=8 2=-1
+Reshape                  head1_Reshape_193        1 1 head1_481 head1_500 0=32 1=8 2=-1
+Permute                  head1_Transpose_202      1 1 head1_508 head1_509 0=2
+Permute                  head1_Transpose_185      1 1 head1_491 head1_492 0=2
+Permute                  head1_Transpose_205      1 1 head1_500 head1_512 0=3
+BinaryOp                 head1_Div_204            1 1 head1_492 head1_511 0=3 1=1 2=5.656854e+00
+MatMul                   head1_MatMul_206         2 1 head1_511 head1_512 head1_513
+Softmax                  head1_Softmax_207        1 1 head1_513 head1_514 0=2 1=1
+MatMul                   head1_MatMul_208         2 1 head1_514 head1_509 head1_515
+Permute                  head1_Transpose_209      1 1 head1_515 head1_516 0=2
+Reshape                  head1_Reshape_214        1 1 head1_516 head1_521 0=256 1=-1
+InnerProduct             head1_MatMul_216         1 1 head1_521 head1_524 0=256 1=1 2=65536
+Reshape                  head1_Reshape_10009      1 1 head1_427_splitncnn_0 head1_10009 0=256 1=-1
+BinaryOp                 head1_Add_218            2 1 head1_10009 head1_524 head1_525
+LayerNorm                head1_LayerNormN-1       1 1 head1_525 head1_536 0=256 1=1.000000e-05
+Split                    head1_splitncnn_3        1 2 head1_536 head1_536_splitncnn_0 head1_536_splitncnn_1
+InnerProduct             head1_MatMul_231         1 1 head1_536_splitncnn_1 head1_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head1_MatMul_235         1 1 head1_540 head1_543 0=256 1=1 2=524288
+BinaryOp                 head1_Add_237            2 1 head1_536_splitncnn_0 head1_543 head1_544
+LayerNorm                head1_LayerNormN-2       1 1 head1_544 head1_555 0=256 1=1.000000e-05
+Reshape                  head1_Reshape_output     1 1 head1_555 head1_Reshape_output 0=256 1=1 2=-1
+LayerNorm                head1_LayerNormN-3       1 1 head1_555 head1_566 0=256 1=1.000000e-05
+Split                    head1_splitncnn_4        1 2 head1_566 head1_567_splitncnn_0 head1_567_splitncnn_1
+InnerProduct             head1_MatMul_262         1 1 head1_567_splitncnn_1 head1_570 0=81 1=1 2=20736
+InnerProduct             head1_MatMul_265         1 1 head1_567_splitncnn_0 head1_574 0=256 1=1 2=65536 9=1
+InnerProduct             head1_MatMul_269         1 1 head1_574 head1_578 0=256 1=1 2=65536 9=1
+InnerProduct             head1_MatMul_273         1 1 head1_578 head1_581 0=256 1=1 2=65536
+Reshape                  head1_Reshape_10010      1 1 head1_581 head1_10010 0=256 1=100 2=-1
+MatMul                   head1_Einsum_80          2 1 head1_10010 head0_mask_features_splitncnn_1 head1_582 0=0
+Reshape                  head1_Reshape_10001      1 1 head1_582 head1_10001 0=-1 1=200 2=100
+Interp                   head1_Resize_20000       1 1 head1_10001 head1_20000 0=2 1=2.500000e-01 2=2.500000e-01 3=0 4=0 6=0
+Sigmoid                  head1_Sigmoid_0          1 1 head1_20000 head1_20001
+gen_attn                 head1_gen_attn_0         1 1 head1_20001 head1_20002
+Split                    head2_level2_splitncnn_0 1 3 predictor_level_embed_plevel_embed_1 head2_level_embed_weight2_splitncnn_0 head2_level_embed_weight2_splitncnn_1 head2_level_embed_weight2_splitncnn_2
+Input                    head2_pos2               0 1 head2_pos2
+Split                    head2_pos22_splitncnn_0  1 3 head2_pos2 head2_pos2_splitncnn_0 head2_pos2_splitncnn_1 head2_pos2_splitncnn_2
+Split                    head2_splitncnn_input3   1 2 head1_Reshape_output head2_query_feat_splitncnn_0 head2_query_feat_splitncnn_1
+Input                    head2_out2               0 1 head2_out2
+Reshape                  head2_Reshape_7          1 1 head2_out2 head2_314 0=-1 1=256 2=1
+Split                    head2_out22_splitncnn_0  1 3 head2_314 head2_out2_splitncnn_0 head2_out2_splitncnn_1 head2_out2_splitncnn_2
+BinaryOp                 head2_Add_10             2 1 head2_query_feat_splitncnn_1 head1_query_embed_splitncnn_2 head2_317
+BinaryOp                 head2_Add_8              2 1 head2_out2_splitncnn_0 head2_level_embed_weight2_splitncnn_0 head2_315
+Reshape                  head2_Reshape_10002      1 1 head2_317 head2_10002 0=-1 1=100
+InnerProduct             head2_MatMul_60          1 1 head2_10002 head2_368 0=256 1=1 2=65536
+Permute                  head2_Transpose_9        1 1 head2_315 head2_316 0=4
+Split                    head2_splitncnn_0        1 2 head2_316 head2_316_splitncnn_0 head2_316_splitncnn_1
+BinaryOp                 head2_Add_11             2 1 head2_316_splitncnn_1 head2_pos2_splitncnn_0 head2_318
+Reshape                  head2_Reshape_10004      1 1 head2_316_splitncnn_0 head2_10004 0=256 1=-1
+InnerProduct             head2_MatMul_66          1 1 head2_10004 head2_374 0=256 1=1 2=65536
+Reshape                  head2_Reshape_74         1 1 head2_368 head2_381 0=32 1=8 2=-1
+Reshape                  head2_Reshape_10003      1 1 head2_318 head2_10003 0=256 1=-1
+InnerProduct             head2_MatMul_63          1 1 head2_10003 head2_371 0=256 1=1 2=65536
+Permute                  head2_Transpose_75       1 1 head2_381 head2_382 0=2
+Reshape                  head2_Reshape_91         1 1 head2_374 head2_398 0=32 1=8 2=-1
+BinaryOp                 head2_Div_94             1 1 head2_382 head2_401 0=3 1=1 2=5.656854e+00
+Reshape                  head2_Reshape_83         1 1 head2_371 head2_390 0=32 1=8 2=-1
+Permute                  head2_Transpose_92       1 1 head2_398 head2_399 0=2
+Permute                  head2_Transpose_95       1 1 head2_390 head2_402 0=3
+MatMul                   head2_MatMul_96          2 1 head2_401 head2_402 head2_403
+BinaryOp                 head2_Add_97             2 1 head2_403 head1_20002 head2_404 0=0
+Softmax                  head2_Softmax_98         1 1 head2_404 head2_405 0=2 1=1
+MatMul                   head2_MatMul_99          2 1 head2_405 head2_399 head2_406
+Permute                  head2_Transpose_100      1 1 head2_406 head2_407 0=2
+Reshape                  head2_Reshape_105        1 1 head2_407 head2_412 0=256 1=-1
+InnerProduct             head2_MatMul_107         1 1 head2_412 head2_415 0=256 1=1 2=65536
+Reshape                  head2_Reshape_10005      1 1 head2_415 head2_10005 0=256 1=1 2=-1
+BinaryOp                 head2_Add_109            2 1 head2_query_feat_splitncnn_0 head2_10005 head2_416
+LayerNorm                head2_LayerNormN-0       1 1 head2_416 head2_427 0=256 1=1.000000e-05
+Split                    head2_splitncnn_1        1 3 head2_427 head2_427_splitncnn_0 head2_427_splitncnn_1 head2_427_splitncnn_2
+BinaryOp                 head2_Add_121            2 1 head2_427_splitncnn_2 head1_query_embed_splitncnn_3 head2_428
+Reshape                  head2_Reshape_10007      1 1 head2_428 head2_10007 0=256 1=-1
+Split                    head2_splitncnn_2        1 2 head2_10007 head2_428_splitncnn_0 head2_428_splitncnn_1
+Reshape                  head2_Reshape_10008      1 1 head2_427_splitncnn_1 head2_10008 0=256 1=-1
+InnerProduct             head2_MatMul_176         1 1 head2_10008 head2_484 0=256 1=1 2=65536
+InnerProduct             head2_MatMul_170         1 1 head2_428_splitncnn_1 head2_478 0=256 1=1 2=65536
+InnerProduct             head2_MatMul_173         1 1 head2_428_splitncnn_0 head2_481 0=256 1=1 2=65536
+Reshape                  head2_Reshape_201        1 1 head2_484 head2_508 0=32 1=8 2=-1
+Reshape                  head2_Reshape_184        1 1 head2_478 head2_491 0=32 1=8 2=-1
+Reshape                  head2_Reshape_193        1 1 head2_481 head2_500 0=32 1=8 2=-1
+Permute                  head2_Transpose_202      1 1 head2_508 head2_509 0=2
+Permute                  head2_Transpose_185      1 1 head2_491 head2_492 0=2
+Permute                  head2_Transpose_205      1 1 head2_500 head2_512 0=3
+BinaryOp                 head2_Div_204            1 1 head2_492 head2_511 0=3 1=1 2=5.656854e+00
+MatMul                   head2_MatMul_206         2 1 head2_511 head2_512 head2_513
+Softmax                  head2_Softmax_207        1 1 head2_513 head2_514 0=2 1=1
+MatMul                   head2_MatMul_208         2 1 head2_514 head2_509 head2_515
+Permute                  head2_Transpose_209      1 1 head2_515 head2_516 0=2
+Reshape                  head2_Reshape_214        1 1 head2_516 head2_521 0=256 1=-1
+InnerProduct             head2_MatMul_216         1 1 head2_521 head2_524 0=256 1=1 2=65536
+Reshape                  head2_Reshape_10009      1 1 head2_427_splitncnn_0 head2_10009 0=256 1=-1
+BinaryOp                 head2_Add_218            2 1 head2_10009 head2_524 head2_525
+LayerNorm                head2_LayerNormN-1       1 1 head2_525 head2_536 0=256 1=1.000000e-05
+Split                    head2_splitncnn_3        1 2 head2_536 head2_536_splitncnn_0 head2_536_splitncnn_1
+InnerProduct             head2_MatMul_231         1 1 head2_536_splitncnn_1 head2_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head2_MatMul_235         1 1 head2_540 head2_543 0=256 1=1 2=524288
+BinaryOp                 head2_Add_237            2 1 head2_536_splitncnn_0 head2_543 head2_544
+LayerNorm                head2_LayerNormN-2       1 1 head2_544 head2_555 0=256 1=1.000000e-05
+Reshape                  head2_Reshape_output     1 1 head2_555 head2_Reshape_output 0=256 1=1 2=-1
+LayerNorm                head2_LayerNormN-3       1 1 head2_555 head2_566 0=256 1=1.000000e-05
+Split                    head2_splitncnn_4        1 2 head2_566 head2_567_splitncnn_0 head2_567_splitncnn_1
+InnerProduct             head2_MatMul_262         1 1 head2_567_splitncnn_1 head2_570 0=81 1=1 2=20736
+InnerProduct             head2_MatMul_265         1 1 head2_567_splitncnn_0 head2_574 0=256 1=1 2=65536 9=1
+InnerProduct             head2_MatMul_269         1 1 head2_574 head2_578 0=256 1=1 2=65536 9=1
+InnerProduct             head2_MatMul_273         1 1 head2_578 head2_581 0=256 1=1 2=65536
+Reshape                  head2_Reshape_10010      1 1 head2_581 head2_10010 0=256 1=100 2=-1
+MatMul                   head2_Einsum_80          2 1 head2_10010 head0_mask_features_splitncnn_2 head2_582 0=0
+Reshape                  head2_Reshape_10001      1 1 head2_582 head2_10001 0=-1 1=200 2=100
+Interp                   head2_Resize_20000       1 1 head2_10001 head2_20000 0=2 1=5.000000e-01 2=5.000000e-01 3=0 4=0 6=0
+Sigmoid                  head2_Sigmoid_0          1 1 head2_20000 head2_20001
+gen_attn                 head2_gen_attn_0         1 1 head2_20001 head2_20002
+Split                    head3_level3_splitncnn_0 1 3 predictor_level_embed_plevel_embed_0 head3_level_embed_weight3_splitncnn_0 head3_level_embed_weight3_splitncnn_1 head3_level_embed_weight3_splitncnn_2
+Input                    head3_pos3               0 1 head3_pos3
+Split                    head3_pos33_splitncnn_0  1 3 head3_pos3 head3_pos3_splitncnn_0 head3_pos3_splitncnn_1 head3_pos3_splitncnn_2
+Split                    head3_splitncnn_input3   1 2 head2_Reshape_output head3_query_feat_splitncnn_0 head3_query_feat_splitncnn_1
+Input                    head3_out3               0 1 head3_out3
+Reshape                  head3_Reshape_7          1 1 head3_out3 head3_314 0=-1 1=256 2=1
+Split                    head1_out33_splitncnn_0  1 3 head3_314 head3_out3_splitncnn_0 head3_out3_splitncnn_1 head3_out3_splitncnn_2
+BinaryOp                 head3_Add_10             2 1 head3_query_feat_splitncnn_1 head1_query_embed_splitncnn_4 head3_317
+BinaryOp                 head3_Add_8              2 1 head3_out3_splitncnn_0 head3_level_embed_weight3_splitncnn_0 head3_315
+Reshape                  head3_Reshape_10002      1 1 head3_317 head3_10002 0=-1 1=100
+InnerProduct             head3_MatMul_60          1 1 head3_10002 head3_368 0=256 1=1 2=65536
+Permute                  head3_Transpose_9        1 1 head3_315 head3_316 0=4
+Split                    head3_splitncnn_0        1 2 head3_316 head3_316_splitncnn_0 head3_316_splitncnn_1
+BinaryOp                 head3_Add_11             2 1 head3_316_splitncnn_1 head3_pos3_splitncnn_0 head3_318
+Reshape                  head3_Reshape_10004      1 1 head3_316_splitncnn_0 head3_10004 0=256 1=-1
+InnerProduct             head3_MatMul_66          1 1 head3_10004 head3_374 0=256 1=1 2=65536
+Reshape                  head3_Reshape_74         1 1 head3_368 head3_381 0=32 1=8 2=-1
+Reshape                  head3_Reshape_10003      1 1 head3_318 head3_10003 0=256 1=-1
+InnerProduct             head3_MatMul_63          1 1 head3_10003 head3_371 0=256 1=1 2=65536
+Permute                  head3_Transpose_75       1 1 head3_381 head3_382 0=2
+Reshape                  head3_Reshape_91         1 1 head3_374 head3_398 0=32 1=8 2=-1
+BinaryOp                 head3_Div_94             1 1 head3_382 head3_401 0=3 1=1 2=5.656854e+00
+Reshape                  head3_Reshape_83         1 1 head3_371 head3_390 0=32 1=8 2=-1
+Permute                  head3_Transpose_92       1 1 head3_398 head3_399 0=2
+Permute                  head3_Transpose_95       1 1 head3_390 head3_402 0=3
+MatMul                   head3_MatMul_96          2 1 head3_401 head3_402 head3_403
+BinaryOp                 head3_Add_97             2 1 head3_403 head2_20002 head3_404 0=0
+Softmax                  head3_Softmax_98         1 1 head3_404 head3_405 0=2 1=1
+MatMul                   head3_MatMul_99          2 1 head3_405 head3_399 head3_406
+Permute                  head3_Transpose_100      1 1 head3_406 head3_407 0=2
+Reshape                  head3_Reshape_105        1 1 head3_407 head3_412 0=256 1=-1
+InnerProduct             head3_MatMul_107         1 1 head3_412 head3_415 0=256 1=1 2=65536
+Reshape                  head3_Reshape_10005      1 1 head3_415 head3_10005 0=256 1=1 2=-1
+BinaryOp                 head3_Add_109            2 1 head3_query_feat_splitncnn_0 head3_10005 head3_416
+LayerNorm                head3_LayerNormN-0       1 1 head3_416 head3_427 0=256 1=1.000000e-05
+Split                    head3_splitncnn_1        1 3 head3_427 head3_427_splitncnn_0 head3_427_splitncnn_1 head3_427_splitncnn_2
+BinaryOp                 head3_Add_121            2 1 head3_427_splitncnn_2 head1_query_embed_splitncnn_5 head3_428
+Reshape                  head3_Reshape_10007      1 1 head3_428 head3_10007 0=256 1=-1
+Split                    head3_splitncnn_2        1 2 head3_10007 head3_428_splitncnn_0 head3_428_splitncnn_1
+Reshape                  head3_Reshape_10008      1 1 head3_427_splitncnn_1 head3_10008 0=256 1=-1
+InnerProduct             head3_MatMul_176         1 1 head3_10008 head3_484 0=256 1=1 2=65536
+InnerProduct             head3_MatMul_170         1 1 head3_428_splitncnn_1 head3_478 0=256 1=1 2=65536
+InnerProduct             head3_MatMul_173         1 1 head3_428_splitncnn_0 head3_481 0=256 1=1 2=65536
+Reshape                  head3_Reshape_201        1 1 head3_484 head3_508 0=32 1=8 2=-1
+Reshape                  head3_Reshape_184        1 1 head3_478 head3_491 0=32 1=8 2=-1
+Reshape                  head3_Reshape_193        1 1 head3_481 head3_500 0=32 1=8 2=-1
+Permute                  head3_Transpose_202      1 1 head3_508 head3_509 0=2
+Permute                  head3_Transpose_185      1 1 head3_491 head3_492 0=2
+Permute                  head3_Transpose_205      1 1 head3_500 head3_512 0=3
+BinaryOp                 head3_Div_204            1 1 head3_492 head3_511 0=3 1=1 2=5.656854e+00
+MatMul                   head3_MatMul_206         2 1 head3_511 head3_512 head3_513
+Softmax                  head3_Softmax_207        1 1 head3_513 head3_514 0=2 1=1
+MatMul                   head3_MatMul_208         2 1 head3_514 head3_509 head3_515
+Permute                  head3_Transpose_209      1 1 head3_515 head3_516 0=2
+Reshape                  head3_Reshape_214        1 1 head3_516 head3_521 0=256 1=-1
+InnerProduct             head3_MatMul_216         1 1 head3_521 head3_524 0=256 1=1 2=65536
+Reshape                  head3_Reshape_10009      1 1 head3_427_splitncnn_0 head3_10009 0=256 1=-1
+BinaryOp                 head3_Add_218            2 1 head3_10009 head3_524 head3_525
+LayerNorm                head3_LayerNormN-1       1 1 head3_525 head3_536 0=256 1=1.000000e-05
+Split                    head3_splitncnn_3        1 2 head3_536 head3_536_splitncnn_0 head3_536_splitncnn_1
+InnerProduct             head3_MatMul_231         1 1 head3_536_splitncnn_1 head3_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head3_MatMul_235         1 1 head3_540 head3_543 0=256 1=1 2=524288
+BinaryOp                 head3_Add_237            2 1 head3_536_splitncnn_0 head3_543 head3_544
+LayerNorm                head3_LayerNormN-2       1 1 head3_544 head3_555 0=256 1=1.000000e-05
+Reshape                  head3_Reshape_output     1 1 head3_555 head3_Reshape_output 0=256 1=1 2=-1
+LayerNorm                head3_LayerNormN-3       1 1 head3_555 head3_566 0=256 1=1.000000e-05
+Split                    head3_splitncnn_4        1 2 head3_566 head3_567_splitncnn_0 head3_567_splitncnn_1
+InnerProduct             head3_MatMul_262         1 1 head3_567_splitncnn_1 head3_570 0=81 1=1 2=20736
+InnerProduct             head3_MatMul_265         1 1 head3_567_splitncnn_0 head3_574 0=256 1=1 2=65536 9=1
+InnerProduct             head3_MatMul_269         1 1 head3_574 head3_578 0=256 1=1 2=65536 9=1
+InnerProduct             head3_MatMul_273         1 1 head3_578 head3_581 0=256 1=1 2=65536
+Reshape                  head3_Reshape_10010      1 1 head3_581 head3_10010 0=256 1=100 2=-1
+MatMul                   head3_Einsum_80          2 1 head3_10010 head0_mask_features_splitncnn_3 head3_582 0=0
+Reshape                  head3_Reshape_10001      1 1 head3_582 head3_10001 0=-1 1=200 2=100
+Interp                   head3_Resize_20000       1 1 head3_10001 head3_20000 0=2 1=1.250000e-01 2=1.250000e-01 3=0 4=0 6=0
+Sigmoid                  head3_Sigmoid_0          1 1 head3_20000 head3_20001
+gen_attn                 head3_gen_attn_0         1 1 head3_20001 head3_20002
+Split                    head4_splitncnn_input3   1 2 head3_Reshape_output head4_query_feat_splitncnn_0 head4_query_feat_splitncnn_1
+BinaryOp                 head4_Add_10             2 1 head4_query_feat_splitncnn_1 head1_query_embed_splitncnn_6 head4_317
+BinaryOp                 head4_Add_8              2 1 head1_out1_splitncnn_1 head1_level_embed_weight1_splitncnn_1 head4_315
+Reshape                  head4_Reshape_10002      1 1 head4_317 head4_10002 0=-1 1=100
+InnerProduct             head4_MatMul_60          1 1 head4_10002 head4_368 0=256 1=1 2=65536
+Permute                  head4_Transpose_9        1 1 head4_315 head4_316 0=4
+Split                    head4_splitncnn_0        1 2 head4_316 head4_316_splitncnn_0 head4_316_splitncnn_1
+BinaryOp                 head4_Add_11             2 1 head4_316_splitncnn_1 head1_pos1_splitncnn_1 head4_318
+Reshape                  head4_Reshape_10004      1 1 head4_316_splitncnn_0 head4_10004 0=256 1=-1
+InnerProduct             head4_MatMul_66          1 1 head4_10004 head4_374 0=256 1=1 2=65536
+Reshape                  head4_Reshape_74         1 1 head4_368 head4_381 0=32 1=8 2=-1
+Reshape                  head4_Reshape_10003      1 1 head4_318 head4_10003 0=256 1=-1
+InnerProduct             head4_MatMul_63          1 1 head4_10003 head4_371 0=256 1=1 2=65536
+Permute                  head4_Transpose_75       1 1 head4_381 head4_382 0=2
+Reshape                  head4_Reshape_91         1 1 head4_374 head4_398 0=32 1=8 2=-1
+BinaryOp                 head4_Div_94             1 1 head4_382 head4_401 0=3 1=1 2=5.656854e+00
+Reshape                  head4_Reshape_83         1 1 head4_371 head4_390 0=32 1=8 2=-1
+Permute                  head4_Transpose_92       1 1 head4_398 head4_399 0=2
+Permute                  head4_Transpose_95       1 1 head4_390 head4_402 0=3
+MatMul                   head4_MatMul_96          2 1 head4_401 head4_402 head4_403
+BinaryOp                 head4_Add_97             2 1 head4_403 head3_20002 head4_404 0=0
+Softmax                  head4_Softmax_98         1 1 head4_404 head4_405 0=2 1=1
+MatMul                   head4_MatMul_99          2 1 head4_405 head4_399 head4_406
+Permute                  head4_Transpose_100      1 1 head4_406 head4_407 0=2
+Reshape                  head4_Reshape_105        1 1 head4_407 head4_412 0=256 1=-1
+InnerProduct             head4_MatMul_107         1 1 head4_412 head4_415 0=256 1=1 2=65536
+Reshape                  head4_Reshape_10005      1 1 head4_415 head4_10005 0=256 1=1 2=-1
+BinaryOp                 head4_Add_109            2 1 head4_query_feat_splitncnn_0 head4_10005 head4_416
+LayerNorm                head4_LayerNormN-0       1 1 head4_416 head4_427 0=256 1=1.000000e-05
+Split                    head4_splitncnn_1        1 3 head4_427 head4_427_splitncnn_0 head4_427_splitncnn_1 head4_427_splitncnn_2
+BinaryOp                 head4_Add_121            2 1 head4_427_splitncnn_2 head1_query_embed_splitncnn_7 head4_428
+Reshape                  head4_Reshape_10007      1 1 head4_428 head4_10007 0=256 1=-1
+Split                    head4_splitncnn_2        1 2 head4_10007 head4_428_splitncnn_0 head4_428_splitncnn_1
+Reshape                  head4_Reshape_10008      1 1 head4_427_splitncnn_1 head4_10008 0=256 1=-1
+InnerProduct             head4_MatMul_176         1 1 head4_10008 head4_484 0=256 1=1 2=65536
+InnerProduct             head4_MatMul_170         1 1 head4_428_splitncnn_1 head4_478 0=256 1=1 2=65536
+InnerProduct             head4_MatMul_173         1 1 head4_428_splitncnn_0 head4_481 0=256 1=1 2=65536
+Reshape                  head4_Reshape_201        1 1 head4_484 head4_508 0=32 1=8 2=-1
+Reshape                  head4_Reshape_184        1 1 head4_478 head4_491 0=32 1=8 2=-1
+Reshape                  head4_Reshape_193        1 1 head4_481 head4_500 0=32 1=8 2=-1
+Permute                  head4_Transpose_202      1 1 head4_508 head4_509 0=2
+Permute                  head4_Transpose_185      1 1 head4_491 head4_492 0=2
+Permute                  head4_Transpose_205      1 1 head4_500 head4_512 0=3
+BinaryOp                 head4_Div_204            1 1 head4_492 head4_511 0=3 1=1 2=5.656854e+00
+MatMul                   head4_MatMul_206         2 1 head4_511 head4_512 head4_513
+Softmax                  head4_Softmax_207        1 1 head4_513 head4_514 0=2 1=1
+MatMul                   head4_MatMul_208         2 1 head4_514 head4_509 head4_515
+Permute                  head4_Transpose_209      1 1 head4_515 head4_516 0=2
+Reshape                  head4_Reshape_214        1 1 head4_516 head4_521 0=256 1=-1
+InnerProduct             head4_MatMul_216         1 1 head4_521 head4_524 0=256 1=1 2=65536
+Reshape                  head4_Reshape_10009      1 1 head4_427_splitncnn_0 head4_10009 0=256 1=-1
+BinaryOp                 head4_Add_218            2 1 head4_10009 head4_524 head4_525
+LayerNorm                head4_LayerNormN-1       1 1 head4_525 head4_536 0=256 1=1.000000e-05
+Split                    head4_splitncnn_3        1 2 head4_536 head4_536_splitncnn_0 head4_536_splitncnn_1
+InnerProduct             head4_MatMul_231         1 1 head4_536_splitncnn_1 head4_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head4_MatMul_235         1 1 head4_540 head4_543 0=256 1=1 2=524288
+BinaryOp                 head4_Add_237            2 1 head4_536_splitncnn_0 head4_543 head4_544
+LayerNorm                head4_LayerNormN-2       1 1 head4_544 head4_555 0=256 1=1.000000e-05
+Reshape                  head4_Reshape_output     1 1 head4_555 head4_Reshape_output 0=256 1=1 2=-1
+LayerNorm                head4_LayerNormN-3       1 1 head4_555 head4_566 0=256 1=1.000000e-05
+Split                    head4_splitncnn_4        1 2 head4_566 head4_567_splitncnn_0 head4_567_splitncnn_1
+InnerProduct             head4_MatMul_262         1 1 head4_567_splitncnn_1 head4_570 0=81 1=1 2=20736
+InnerProduct             head4_MatMul_265         1 1 head4_567_splitncnn_0 head4_574 0=256 1=1 2=65536 9=1
+InnerProduct             head4_MatMul_269         1 1 head4_574 head4_578 0=256 1=1 2=65536 9=1
+InnerProduct             head4_MatMul_273         1 1 head4_578 head4_581 0=256 1=1 2=65536
+Reshape                  head4_Reshape_10010      1 1 head4_581 head4_10010 0=256 1=100 2=-1
+MatMul                   head4_Einsum_80          2 1 head4_10010 head0_mask_features_splitncnn_4 head4_582 0=0
+Reshape                  head4_Reshape_10001      1 1 head4_582 head4_10001 0=-1 1=200 2=100
+Interp                   head4_Resize_20000       1 1 head4_10001 head4_20000 0=2 1=2.500000e-01 2=2.500000e-01 3=0 4=0 6=0
+Sigmoid                  head4_Sigmoid_0          1 1 head4_20000 head4_20001
+gen_attn                 head4_gen_attn_0         1 1 head4_20001 head4_20002
+Split                    head5_splitncnn_input3   1 2 head4_Reshape_output head5_query_feat_splitncnn_0 head5_query_feat_splitncnn_1
+BinaryOp                 head5_Add_10             2 1 head5_query_feat_splitncnn_1 head1_query_embed_splitncnn_8 head5_317
+BinaryOp                 head5_Add_8              2 1 head2_out2_splitncnn_1 head2_level_embed_weight2_splitncnn_1 head5_315
+Reshape                  head5_Reshape_10002      1 1 head5_317 head5_10002 0=-1 1=100
+InnerProduct             head5_MatMul_60          1 1 head5_10002 head5_368 0=256 1=1 2=65536
+Permute                  head5_Transpose_9        1 1 head5_315 head5_316 0=4
+Split                    head5_splitncnn_0        1 2 head5_316 head5_316_splitncnn_0 head5_316_splitncnn_1
+BinaryOp                 head5_Add_11             2 1 head5_316_splitncnn_1 head2_pos2_splitncnn_1 head5_318
+Reshape                  head5_Reshape_10004      1 1 head5_316_splitncnn_0 head5_10004 0=256 1=-1
+InnerProduct             head5_MatMul_66          1 1 head5_10004 head5_374 0=256 1=1 2=65536
+Reshape                  head5_Reshape_74         1 1 head5_368 head5_381 0=32 1=8 2=-1
+Reshape                  head5_Reshape_10003      1 1 head5_318 head5_10003 0=256 1=-1
+InnerProduct             head5_MatMul_63          1 1 head5_10003 head5_371 0=256 1=1 2=65536
+Permute                  head5_Transpose_75       1 1 head5_381 head5_382 0=2
+Reshape                  head5_Reshape_91         1 1 head5_374 head5_398 0=32 1=8 2=-1
+BinaryOp                 head5_Div_94             1 1 head5_382 head5_401 0=3 1=1 2=5.656854e+00
+Reshape                  head5_Reshape_83         1 1 head5_371 head5_390 0=32 1=8 2=-1
+Permute                  head5_Transpose_92       1 1 head5_398 head5_399 0=2
+Permute                  head5_Transpose_95       1 1 head5_390 head5_402 0=3
+MatMul                   head5_MatMul_96          2 1 head5_401 head5_402 head5_403
+BinaryOp                 head5_Add_97             2 1 head5_403 head4_20002 head5_404 0=0
+Softmax                  head5_Softmax_98         1 1 head5_404 head5_405 0=2 1=1
+MatMul                   head5_MatMul_99          2 1 head5_405 head5_399 head5_406
+Permute                  head5_Transpose_100      1 1 head5_406 head5_407 0=2
+Reshape                  head5_Reshape_105        1 1 head5_407 head5_412 0=256 1=-1
+InnerProduct             head5_MatMul_107         1 1 head5_412 head5_415 0=256 1=1 2=65536
+Reshape                  head5_Reshape_10005      1 1 head5_415 head5_10005 0=256 1=1 2=-1
+BinaryOp                 head5_Add_109            2 1 head5_query_feat_splitncnn_0 head5_10005 head5_416
+LayerNorm                head5_LayerNormN-0       1 1 head5_416 head5_427 0=256 1=1.000000e-05
+Split                    head5_splitncnn_1        1 3 head5_427 head5_427_splitncnn_0 head5_427_splitncnn_1 head5_427_splitncnn_2
+BinaryOp                 head5_Add_121            2 1 head5_427_splitncnn_2 head1_query_embed_splitncnn_9 head5_428
+Reshape                  head5_Reshape_10007      1 1 head5_428 head5_10007 0=256 1=-1
+Split                    head5_splitncnn_2        1 2 head5_10007 head5_428_splitncnn_0 head5_428_splitncnn_1
+Reshape                  head5_Reshape_10008      1 1 head5_427_splitncnn_1 head5_10008 0=256 1=-1
+InnerProduct             head5_MatMul_176         1 1 head5_10008 head5_484 0=256 1=1 2=65536
+InnerProduct             head5_MatMul_170         1 1 head5_428_splitncnn_1 head5_478 0=256 1=1 2=65536
+InnerProduct             head5_MatMul_173         1 1 head5_428_splitncnn_0 head5_481 0=256 1=1 2=65536
+Reshape                  head5_Reshape_201        1 1 head5_484 head5_508 0=32 1=8 2=-1
+Reshape                  head5_Reshape_184        1 1 head5_478 head5_491 0=32 1=8 2=-1
+Reshape                  head5_Reshape_193        1 1 head5_481 head5_500 0=32 1=8 2=-1
+Permute                  head5_Transpose_202      1 1 head5_508 head5_509 0=2
+Permute                  head5_Transpose_185      1 1 head5_491 head5_492 0=2
+Permute                  head5_Transpose_205      1 1 head5_500 head5_512 0=3
+BinaryOp                 head5_Div_204            1 1 head5_492 head5_511 0=3 1=1 2=5.656854e+00
+MatMul                   head5_MatMul_206         2 1 head5_511 head5_512 head5_513
+Softmax                  head5_Softmax_207        1 1 head5_513 head5_514 0=2 1=1
+MatMul                   head5_MatMul_208         2 1 head5_514 head5_509 head5_515
+Permute                  head5_Transpose_209      1 1 head5_515 head5_516 0=2
+Reshape                  head5_Reshape_214        1 1 head5_516 head5_521 0=256 1=-1
+InnerProduct             head5_MatMul_216         1 1 head5_521 head5_524 0=256 1=1 2=65536
+Reshape                  head5_Reshape_10009      1 1 head5_427_splitncnn_0 head5_10009 0=256 1=-1
+BinaryOp                 head5_Add_218            2 1 head5_10009 head5_524 head5_525
+LayerNorm                head5_LayerNormN-1       1 1 head5_525 head5_536 0=256 1=1.000000e-05
+Split                    head5_splitncnn_3        1 2 head5_536 head5_536_splitncnn_0 head5_536_splitncnn_1
+InnerProduct             head5_MatMul_231         1 1 head5_536_splitncnn_1 head5_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head5_MatMul_235         1 1 head5_540 head5_543 0=256 1=1 2=524288
+BinaryOp                 head5_Add_237            2 1 head5_536_splitncnn_0 head5_543 head5_544
+LayerNorm                head5_LayerNormN-2       1 1 head5_544 head5_555 0=256 1=1.000000e-05
+Reshape                  head5_Reshape_output     1 1 head5_555 head5_Reshape_output 0=256 1=1 2=-1
+LayerNorm                head5_LayerNormN-3       1 1 head5_555 head5_566 0=256 1=1.000000e-05
+Split                    head5_splitncnn_4        1 2 head5_566 head5_567_splitncnn_0 head5_567_splitncnn_1
+InnerProduct             head5_MatMul_262         1 1 head5_567_splitncnn_1 head5_570 0=81 1=1 2=20736
+InnerProduct             head5_MatMul_265         1 1 head5_567_splitncnn_0 head5_574 0=256 1=1 2=65536 9=1
+InnerProduct             head5_MatMul_269         1 1 head5_574 head5_578 0=256 1=1 2=65536 9=1
+InnerProduct             head5_MatMul_273         1 1 head5_578 head5_581 0=256 1=1 2=65536
+Reshape                  head5_Reshape_10010      1 1 head5_581 head5_10010 0=256 1=100 2=-1
+MatMul                   head5_Einsum_80          2 1 head5_10010 head0_mask_features_splitncnn_5 head5_582 0=0
+Reshape                  head5_Reshape_10001      1 1 head5_582 head5_10001 0=-1 1=200 2=100
+Interp                   head5_Resize_20000       1 1 head5_10001 head5_20000 0=2 1=5.000000e-01 2=5.000000e-01 3=0 4=0 6=0
+Sigmoid                  head5_Sigmoid_0          1 1 head5_20000 head5_20001
+gen_attn                 head5_gen_attn_0         1 1 head5_20001 head5_20002
+Split                    head6_splitncnn_input3   1 2 head5_Reshape_output head6_query_feat_splitncnn_0 head6_query_feat_splitncnn_1
+BinaryOp                 head6_Add_10             2 1 head6_query_feat_splitncnn_1 head1_query_embed_splitncnn_10 head6_317
+BinaryOp                 head6_Add_8              2 1 head3_out3_splitncnn_1 head3_level_embed_weight3_splitncnn_1 head6_315
+Reshape                  head6_Reshape_10002      1 1 head6_317 head6_10002 0=-1 1=100
+InnerProduct             head6_MatMul_60          1 1 head6_10002 head6_368 0=256 1=1 2=65536
+Permute                  head6_Transpose_9        1 1 head6_315 head6_316 0=4
+Split                    head6_splitncnn_0        1 2 head6_316 head6_316_splitncnn_0 head6_316_splitncnn_1
+BinaryOp                 head6_Add_11             2 1 head6_316_splitncnn_1 head3_pos3_splitncnn_1 head6_318
+Reshape                  head6_Reshape_10004      1 1 head6_316_splitncnn_0 head6_10004 0=256 1=-1
+InnerProduct             head6_MatMul_66          1 1 head6_10004 head6_374 0=256 1=1 2=65536
+Reshape                  head6_Reshape_74         1 1 head6_368 head6_381 0=32 1=8 2=-1
+Reshape                  head6_Reshape_10003      1 1 head6_318 head6_10003 0=256 1=-1
+InnerProduct             head6_MatMul_63          1 1 head6_10003 head6_371 0=256 1=1 2=65536
+Permute                  head6_Transpose_75       1 1 head6_381 head6_382 0=2
+Reshape                  head6_Reshape_91         1 1 head6_374 head6_398 0=32 1=8 2=-1
+BinaryOp                 head6_Div_94             1 1 head6_382 head6_401 0=3 1=1 2=5.656854e+00
+Reshape                  head6_Reshape_83         1 1 head6_371 head6_390 0=32 1=8 2=-1
+Permute                  head6_Transpose_92       1 1 head6_398 head6_399 0=2
+Permute                  head6_Transpose_95       1 1 head6_390 head6_402 0=3
+MatMul                   head6_MatMul_96          2 1 head6_401 head6_402 head6_403
+BinaryOp                 head6_Add_97             2 1 head6_403 head5_20002 head6_404 0=0
+Softmax                  head6_Softmax_98         1 1 head6_404 head6_405 0=2 1=1
+MatMul                   head6_MatMul_99          2 1 head6_405 head6_399 head6_406
+Permute                  head6_Transpose_100      1 1 head6_406 head6_407 0=2
+Reshape                  head6_Reshape_105        1 1 head6_407 head6_412 0=256 1=-1
+InnerProduct             head6_MatMul_107         1 1 head6_412 head6_415 0=256 1=1 2=65536
+Reshape                  head6_Reshape_10005      1 1 head6_415 head6_10005 0=256 1=1 2=-1
+BinaryOp                 head6_Add_109            2 1 head6_query_feat_splitncnn_0 head6_10005 head6_416
+LayerNorm                head6_LayerNormN-0       1 1 head6_416 head6_427 0=256 1=1.000000e-05
+Split                    head6_splitncnn_1        1 3 head6_427 head6_427_splitncnn_0 head6_427_splitncnn_1 head6_427_splitncnn_2
+BinaryOp                 head6_Add_121            2 1 head6_427_splitncnn_2 head1_query_embed_splitncnn_11 head6_428
+Reshape                  head6_Reshape_10007      1 1 head6_428 head6_10007 0=256 1=-1
+Split                    head6_splitncnn_2        1 2 head6_10007 head6_428_splitncnn_0 head6_428_splitncnn_1
+Reshape                  head6_Reshape_10008      1 1 head6_427_splitncnn_1 head6_10008 0=256 1=-1
+InnerProduct             head6_MatMul_176         1 1 head6_10008 head6_484 0=256 1=1 2=65536
+InnerProduct             head6_MatMul_170         1 1 head6_428_splitncnn_1 head6_478 0=256 1=1 2=65536
+InnerProduct             head6_MatMul_173         1 1 head6_428_splitncnn_0 head6_481 0=256 1=1 2=65536
+Reshape                  head6_Reshape_201        1 1 head6_484 head6_508 0=32 1=8 2=-1
+Reshape                  head6_Reshape_184        1 1 head6_478 head6_491 0=32 1=8 2=-1
+Reshape                  head6_Reshape_193        1 1 head6_481 head6_500 0=32 1=8 2=-1
+Permute                  head6_Transpose_202      1 1 head6_508 head6_509 0=2
+Permute                  head6_Transpose_185      1 1 head6_491 head6_492 0=2
+Permute                  head6_Transpose_205      1 1 head6_500 head6_512 0=3
+BinaryOp                 head6_Div_204            1 1 head6_492 head6_511 0=3 1=1 2=5.656854e+00
+MatMul                   head6_MatMul_206         2 1 head6_511 head6_512 head6_513
+Softmax                  head6_Softmax_207        1 1 head6_513 head6_514 0=2 1=1
+MatMul                   head6_MatMul_208         2 1 head6_514 head6_509 head6_515
+Permute                  head6_Transpose_209      1 1 head6_515 head6_516 0=2
+Reshape                  head6_Reshape_214        1 1 head6_516 head6_521 0=256 1=-1
+InnerProduct             head6_MatMul_216         1 1 head6_521 head6_524 0=256 1=1 2=65536
+Reshape                  head6_Reshape_10009      1 1 head6_427_splitncnn_0 head6_10009 0=256 1=-1
+BinaryOp                 head6_Add_218            2 1 head6_10009 head6_524 head6_525
+LayerNorm                head6_LayerNormN-1       1 1 head6_525 head6_536 0=256 1=1.000000e-05
+Split                    head6_splitncnn_3        1 2 head6_536 head6_536_splitncnn_0 head6_536_splitncnn_1
+InnerProduct             head6_MatMul_231         1 1 head6_536_splitncnn_1 head6_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head6_MatMul_235         1 1 head6_540 head6_543 0=256 1=1 2=524288
+BinaryOp                 head6_Add_237            2 1 head6_536_splitncnn_0 head6_543 head6_544
+LayerNorm                head6_LayerNormN-2       1 1 head6_544 head6_555 0=256 1=1.000000e-05
+Reshape                  head6_Reshape_output     1 1 head6_555 head6_Reshape_output 0=256 1=1 2=-1
+LayerNorm                head6_LayerNormN-3       1 1 head6_555 head6_566 0=256 1=1.000000e-05
+Split                    head6_splitncnn_4        1 2 head6_566 head6_567_splitncnn_0 head6_567_splitncnn_1
+InnerProduct             head6_MatMul_262         1 1 head6_567_splitncnn_1 head6_570 0=81 1=1 2=20736
+InnerProduct             head6_MatMul_265         1 1 head6_567_splitncnn_0 head6_574 0=256 1=1 2=65536 9=1
+InnerProduct             head6_MatMul_269         1 1 head6_574 head6_578 0=256 1=1 2=65536 9=1
+InnerProduct             head6_MatMul_273         1 1 head6_578 head6_581 0=256 1=1 2=65536
+Reshape                  head6_Reshape_10010      1 1 head6_581 head6_10010 0=256 1=100 2=-1
+MatMul                   head6_Einsum_80          2 1 head6_10010 head0_mask_features_splitncnn_6 head6_582 0=0
+Reshape                  head6_Reshape_10001      1 1 head6_582 head6_10001 0=-1 1=200 2=100
+Interp                   head6_Resize_20000       1 1 head6_10001 head6_20000 0=2 1=1.250000e-01 2=1.250000e-01 3=0 4=0 6=0
+Sigmoid                  head6_Sigmoid_0          1 1 head6_20000 head6_20001
+gen_attn                 head6_gen_attn_0         1 1 head6_20001 head6_20002
+Split                    head7_splitncnn_input3   1 2 head6_Reshape_output head7_query_feat_splitncnn_0 head7_query_feat_splitncnn_1
+BinaryOp                 head7_Add_10             2 1 head7_query_feat_splitncnn_1 head1_query_embed_splitncnn_12 head7_317
+BinaryOp                 head7_Add_8              2 1 head1_out1_splitncnn_2 head1_level_embed_weight1_splitncnn_2 head7_315
+Reshape                  head7_Reshape_10002      1 1 head7_317 head7_10002 0=-1 1=100
+InnerProduct             head7_MatMul_60          1 1 head7_10002 head7_368 0=256 1=1 2=65536
+Permute                  head7_Transpose_9        1 1 head7_315 head7_316 0=4
+Split                    head7_splitncnn_0        1 2 head7_316 head7_316_splitncnn_0 head7_316_splitncnn_1
+BinaryOp                 head7_Add_11             2 1 head7_316_splitncnn_1 head1_pos1_splitncnn_2 head7_318
+Reshape                  head7_Reshape_10004      1 1 head7_316_splitncnn_0 head7_10004 0=256 1=-1
+InnerProduct             head7_MatMul_66          1 1 head7_10004 head7_374 0=256 1=1 2=65536
+Reshape                  head7_Reshape_74         1 1 head7_368 head7_381 0=32 1=8 2=-1
+Reshape                  head7_Reshape_10003      1 1 head7_318 head7_10003 0=256 1=-1
+InnerProduct             head7_MatMul_63          1 1 head7_10003 head7_371 0=256 1=1 2=65536
+Permute                  head7_Transpose_75       1 1 head7_381 head7_382 0=2
+Reshape                  head7_Reshape_91         1 1 head7_374 head7_398 0=32 1=8 2=-1
+BinaryOp                 head7_Div_94             1 1 head7_382 head7_401 0=3 1=1 2=5.656854e+00
+Reshape                  head7_Reshape_83         1 1 head7_371 head7_390 0=32 1=8 2=-1
+Permute                  head7_Transpose_92       1 1 head7_398 head7_399 0=2
+Permute                  head7_Transpose_95       1 1 head7_390 head7_402 0=3
+MatMul                   head7_MatMul_96          2 1 head7_401 head7_402 head7_403
+BinaryOp                 head7_Add_97             2 1 head7_403 head6_20002 head7_404 0=0
+Softmax                  head7_Softmax_98         1 1 head7_404 head7_405 0=2 1=1
+MatMul                   head7_MatMul_99          2 1 head7_405 head7_399 head7_406
+Permute                  head7_Transpose_100      1 1 head7_406 head7_407 0=2
+Reshape                  head7_Reshape_105        1 1 head7_407 head7_412 0=256 1=-1
+InnerProduct             head7_MatMul_107         1 1 head7_412 head7_415 0=256 1=1 2=65536
+Reshape                  head7_Reshape_10005      1 1 head7_415 head7_10005 0=256 1=1 2=-1
+BinaryOp                 head7_Add_109            2 1 head7_query_feat_splitncnn_0 head7_10005 head7_416
+LayerNorm                head7_LayerNormN-0       1 1 head7_416 head7_427 0=256 1=1.000000e-05
+Split                    head7_splitncnn_1        1 3 head7_427 head7_427_splitncnn_0 head7_427_splitncnn_1 head7_427_splitncnn_2
+BinaryOp                 head7_Add_121            2 1 head7_427_splitncnn_2 head1_query_embed_splitncnn_13 head7_428
+Reshape                  head7_Reshape_10007      1 1 head7_428 head7_10007 0=256 1=-1
+Split                    head7_splitncnn_2        1 2 head7_10007 head7_428_splitncnn_0 head7_428_splitncnn_1
+Reshape                  head7_Reshape_10008      1 1 head7_427_splitncnn_1 head7_10008 0=256 1=-1
+InnerProduct             head7_MatMul_176         1 1 head7_10008 head7_484 0=256 1=1 2=65536
+InnerProduct             head7_MatMul_170         1 1 head7_428_splitncnn_1 head7_478 0=256 1=1 2=65536
+InnerProduct             head7_MatMul_173         1 1 head7_428_splitncnn_0 head7_481 0=256 1=1 2=65536
+Reshape                  head7_Reshape_201        1 1 head7_484 head7_508 0=32 1=8 2=-1
+Reshape                  head7_Reshape_184        1 1 head7_478 head7_491 0=32 1=8 2=-1
+Reshape                  head7_Reshape_193        1 1 head7_481 head7_500 0=32 1=8 2=-1
+Permute                  head7_Transpose_202      1 1 head7_508 head7_509 0=2
+Permute                  head7_Transpose_185      1 1 head7_491 head7_492 0=2
+Permute                  head7_Transpose_205      1 1 head7_500 head7_512 0=3
+BinaryOp                 head7_Div_204            1 1 head7_492 head7_511 0=3 1=1 2=5.656854e+00
+MatMul                   head7_MatMul_206         2 1 head7_511 head7_512 head7_513
+Softmax                  head7_Softmax_207        1 1 head7_513 head7_514 0=2 1=1
+MatMul                   head7_MatMul_208         2 1 head7_514 head7_509 head7_515
+Permute                  head7_Transpose_209      1 1 head7_515 head7_516 0=2
+Reshape                  head7_Reshape_214        1 1 head7_516 head7_521 0=256 1=-1
+InnerProduct             head7_MatMul_216         1 1 head7_521 head7_524 0=256 1=1 2=65536
+Reshape                  head7_Reshape_10009      1 1 head7_427_splitncnn_0 head7_10009 0=256 1=-1
+BinaryOp                 head7_Add_218            2 1 head7_10009 head7_524 head7_525
+LayerNorm                head7_LayerNormN-1       1 1 head7_525 head7_536 0=256 1=1.000000e-05
+Split                    head7_splitncnn_3        1 2 head7_536 head7_536_splitncnn_0 head7_536_splitncnn_1
+InnerProduct             head7_MatMul_231         1 1 head7_536_splitncnn_1 head7_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head7_MatMul_235         1 1 head7_540 head7_543 0=256 1=1 2=524288
+BinaryOp                 head7_Add_237            2 1 head7_536_splitncnn_0 head7_543 head7_544
+LayerNorm                head7_LayerNormN-2       1 1 head7_544 head7_555 0=256 1=1.000000e-05
+Reshape                  head7_Reshape_output     1 1 head7_555 head7_Reshape_output 0=256 1=1 2=-1
+LayerNorm                head7_LayerNormN-3       1 1 head7_555 head7_566 0=256 1=1.000000e-05
+Split                    head7_splitncnn_4        1 2 head7_566 head7_567_splitncnn_0 head7_567_splitncnn_1
+InnerProduct             head7_MatMul_262         1 1 head7_567_splitncnn_1 head7_570 0=81 1=1 2=20736
+InnerProduct             head7_MatMul_265         1 1 head7_567_splitncnn_0 head7_574 0=256 1=1 2=65536 9=1
+InnerProduct             head7_MatMul_269         1 1 head7_574 head7_578 0=256 1=1 2=65536 9=1
+InnerProduct             head7_MatMul_273         1 1 head7_578 head7_581 0=256 1=1 2=65536
+Reshape                  head7_Reshape_10010      1 1 head7_581 head7_10010 0=256 1=100 2=-1
+MatMul                   head7_Einsum_80          2 1 head7_10010 head0_mask_features_splitncnn_7 head7_582 0=0
+Reshape                  head7_Reshape_10001      1 1 head7_582 head7_10001 0=-1 1=200 2=100
+Interp                   head7_Resize_20000       1 1 head7_10001 head7_20000 0=2 1=2.500000e-01 2=2.500000e-01 3=0 4=0 6=0
+Sigmoid                  head7_Sigmoid_0          1 1 head7_20000 head7_20001
+gen_attn                 head7_gen_attn_0         1 1 head7_20001 head7_20002
+Split                    head8_splitncnn_input3   1 2 head7_Reshape_output head8_query_feat_splitncnn_0 head8_query_feat_splitncnn_1
+BinaryOp                 head8_Add_10             2 1 head8_query_feat_splitncnn_1 head1_query_embed_splitncnn_14 head8_317
+BinaryOp                 head8_Add_8              2 1 head2_out2_splitncnn_2 head2_level_embed_weight2_splitncnn_2 head8_315
+Reshape                  head8_Reshape_10002      1 1 head8_317 head8_10002 0=-1 1=100
+InnerProduct             head8_MatMul_60          1 1 head8_10002 head8_368 0=256 1=1 2=65536
+Permute                  head8_Transpose_9        1 1 head8_315 head8_316 0=4
+Split                    head8_splitncnn_0        1 2 head8_316 head8_316_splitncnn_0 head8_316_splitncnn_1
+BinaryOp                 head8_Add_11             2 1 head8_316_splitncnn_1 head2_pos2_splitncnn_2 head8_318
+Reshape                  head8_Reshape_10004      1 1 head8_316_splitncnn_0 head8_10004 0=256 1=-1
+InnerProduct             head8_MatMul_66          1 1 head8_10004 head8_374 0=256 1=1 2=65536
+Reshape                  head8_Reshape_74         1 1 head8_368 head8_381 0=32 1=8 2=-1
+Reshape                  head8_Reshape_10003      1 1 head8_318 head8_10003 0=256 1=-1
+InnerProduct             head8_MatMul_63          1 1 head8_10003 head8_371 0=256 1=1 2=65536
+Permute                  head8_Transpose_75       1 1 head8_381 head8_382 0=2
+Reshape                  head8_Reshape_91         1 1 head8_374 head8_398 0=32 1=8 2=-1
+BinaryOp                 head8_Div_94             1 1 head8_382 head8_401 0=3 1=1 2=5.656854e+00
+Reshape                  head8_Reshape_83         1 1 head8_371 head8_390 0=32 1=8 2=-1
+Permute                  head8_Transpose_92       1 1 head8_398 head8_399 0=2
+Permute                  head8_Transpose_95       1 1 head8_390 head8_402 0=3
+MatMul                   head8_MatMul_96          2 1 head8_401 head8_402 head8_403
+BinaryOp                 head8_Add_97             2 1 head8_403 head7_20002 head8_404 0=0
+Softmax                  head8_Softmax_98         1 1 head8_404 head8_405 0=2 1=1
+MatMul                   head8_MatMul_99          2 1 head8_405 head8_399 head8_406
+Permute                  head8_Transpose_100      1 1 head8_406 head8_407 0=2
+Reshape                  head8_Reshape_105        1 1 head8_407 head8_412 0=256 1=-1
+InnerProduct             head8_MatMul_107         1 1 head8_412 head8_415 0=256 1=1 2=65536
+Reshape                  head8_Reshape_10005      1 1 head8_415 head8_10005 0=256 1=1 2=-1
+BinaryOp                 head8_Add_109            2 1 head8_query_feat_splitncnn_0 head8_10005 head8_416
+LayerNorm                head8_LayerNormN-0       1 1 head8_416 head8_427 0=256 1=1.000000e-05
+Split                    head8_splitncnn_1        1 3 head8_427 head8_427_splitncnn_0 head8_427_splitncnn_1 head8_427_splitncnn_2
+BinaryOp                 head8_Add_121            2 1 head8_427_splitncnn_2 head1_query_embed_splitncnn_15 head8_428
+Reshape                  head8_Reshape_10007      1 1 head8_428 head8_10007 0=256 1=-1
+Split                    head8_splitncnn_2        1 2 head8_10007 head8_428_splitncnn_0 head8_428_splitncnn_1
+Reshape                  head8_Reshape_10008      1 1 head8_427_splitncnn_1 head8_10008 0=256 1=-1
+InnerProduct             head8_MatMul_176         1 1 head8_10008 head8_484 0=256 1=1 2=65536
+InnerProduct             head8_MatMul_170         1 1 head8_428_splitncnn_1 head8_478 0=256 1=1 2=65536
+InnerProduct             head8_MatMul_173         1 1 head8_428_splitncnn_0 head8_481 0=256 1=1 2=65536
+Reshape                  head8_Reshape_201        1 1 head8_484 head8_508 0=32 1=8 2=-1
+Reshape                  head8_Reshape_184        1 1 head8_478 head8_491 0=32 1=8 2=-1
+Reshape                  head8_Reshape_193        1 1 head8_481 head8_500 0=32 1=8 2=-1
+Permute                  head8_Transpose_202      1 1 head8_508 head8_509 0=2
+Permute                  head8_Transpose_185      1 1 head8_491 head8_492 0=2
+Permute                  head8_Transpose_205      1 1 head8_500 head8_512 0=3
+BinaryOp                 head8_Div_204            1 1 head8_492 head8_511 0=3 1=1 2=5.656854e+00
+MatMul                   head8_MatMul_206         2 1 head8_511 head8_512 head8_513
+Softmax                  head8_Softmax_207        1 1 head8_513 head8_514 0=2 1=1
+MatMul                   head8_MatMul_208         2 1 head8_514 head8_509 head8_515
+Permute                  head8_Transpose_209      1 1 head8_515 head8_516 0=2
+Reshape                  head8_Reshape_214        1 1 head8_516 head8_521 0=256 1=-1
+InnerProduct             head8_MatMul_216         1 1 head8_521 head8_524 0=256 1=1 2=65536
+Reshape                  head8_Reshape_10009      1 1 head8_427_splitncnn_0 head8_10009 0=256 1=-1
+BinaryOp                 head8_Add_218            2 1 head8_10009 head8_524 head8_525
+LayerNorm                head8_LayerNormN-1       1 1 head8_525 head8_536 0=256 1=1.000000e-05
+Split                    head8_splitncnn_3        1 2 head8_536 head8_536_splitncnn_0 head8_536_splitncnn_1
+InnerProduct             head8_MatMul_231         1 1 head8_536_splitncnn_1 head8_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head8_MatMul_235         1 1 head8_540 head8_543 0=256 1=1 2=524288
+BinaryOp                 head8_Add_237            2 1 head8_536_splitncnn_0 head8_543 head8_544
+LayerNorm                head8_LayerNormN-2       1 1 head8_544 head8_555 0=256 1=1.000000e-05
+Reshape                  head8_Reshape_output     1 1 head8_555 head8_Reshape_output 0=256 1=1 2=-1
+LayerNorm                head8_LayerNormN-3       1 1 head8_555 head8_566 0=256 1=1.000000e-05
+Split                    head8_splitncnn_4        1 2 head8_566 head8_567_splitncnn_0 head8_567_splitncnn_1
+InnerProduct             head8_MatMul_262         1 1 head8_567_splitncnn_1 head8_570 0=81 1=1 2=20736
+InnerProduct             head8_MatMul_265         1 1 head8_567_splitncnn_0 head8_574 0=256 1=1 2=65536 9=1
+InnerProduct             head8_MatMul_269         1 1 head8_574 head8_578 0=256 1=1 2=65536 9=1
+InnerProduct             head8_MatMul_273         1 1 head8_578 head8_581 0=256 1=1 2=65536
+Reshape                  head8_Reshape_10010      1 1 head8_581 head8_10010 0=256 1=100 2=-1
+MatMul                   head8_Einsum_80          2 1 head8_10010 head0_mask_features_splitncnn_8 head8_582 0=0
+Reshape                  head8_Reshape_10001      1 1 head8_582 head8_10001 0=-1 1=200 2=100
+Interp                   head8_Resize_20000       1 1 head8_10001 head8_20000 0=2 1=5.000000e-01 2=5.000000e-01 3=0 4=0 6=0
+Sigmoid                  head8_Sigmoid_0          1 1 head8_20000 head8_20001
+gen_attn                 head8_gen_attn_0         1 1 head8_20001 head8_20002
+Split                    head9_splitncnn_input3   1 2 head8_Reshape_output head9_query_feat_splitncnn_0 head9_query_feat_splitncnn_1
+BinaryOp                 head9_Add_10             2 1 head9_query_feat_splitncnn_1 head1_query_embed_splitncnn_16 head9_317
+BinaryOp                 head9_Add_8              2 1 head3_out3_splitncnn_2 head3_level_embed_weight3_splitncnn_2 head9_315
+Reshape                  head9_Reshape_10002      1 1 head9_317 head9_10002 0=-1 1=100
+InnerProduct             head9_MatMul_60          1 1 head9_10002 head9_368 0=256 1=1 2=65536
+Permute                  head9_Transpose_9        1 1 head9_315 head9_316 0=4
+Split                    head9_splitncnn_0        1 2 head9_316 head9_316_splitncnn_0 head9_316_splitncnn_1
+BinaryOp                 head9_Add_11             2 1 head9_316_splitncnn_1 head3_pos3_splitncnn_2 head9_318
+Reshape                  head9_Reshape_10004      1 1 head9_316_splitncnn_0 head9_10004 0=256 1=-1
+InnerProduct             head9_MatMul_66          1 1 head9_10004 head9_374 0=256 1=1 2=65536
+Reshape                  head9_Reshape_74         1 1 head9_368 head9_381 0=32 1=8 2=-1
+Reshape                  head9_Reshape_10003      1 1 head9_318 head9_10003 0=256 1=-1
+InnerProduct             head9_MatMul_63          1 1 head9_10003 head9_371 0=256 1=1 2=65536
+Permute                  head9_Transpose_75       1 1 head9_381 head9_382 0=2
+Reshape                  head9_Reshape_91         1 1 head9_374 head9_398 0=32 1=8 2=-1
+BinaryOp                 head9_Div_94             1 1 head9_382 head9_401 0=3 1=1 2=5.656854e+00
+Reshape                  head9_Reshape_83         1 1 head9_371 head9_390 0=32 1=8 2=-1
+Permute                  head9_Transpose_92       1 1 head9_398 head9_399 0=2
+Permute                  head9_Transpose_95       1 1 head9_390 head9_402 0=3
+MatMul                   head9_MatMul_96          2 1 head9_401 head9_402 head9_403
+BinaryOp                 head9_Add_97             2 1 head9_403 head8_20002 head9_404 0=0
+Softmax                  head9_Softmax_98         1 1 head9_404 head9_405 0=2 1=1
+MatMul                   head9_MatMul_99          2 1 head9_405 head9_399 head9_406
+Permute                  head9_Transpose_100      1 1 head9_406 head9_407 0=2
+Reshape                  head9_Reshape_105        1 1 head9_407 head9_412 0=256 1=-1
+InnerProduct             head9_MatMul_107         1 1 head9_412 head9_415 0=256 1=1 2=65536
+Reshape                  head9_Reshape_10005      1 1 head9_415 head9_10005 0=256 1=1 2=-1
+BinaryOp                 head9_Add_109            2 1 head9_query_feat_splitncnn_0 head9_10005 head9_416
+LayerNorm                head9_LayerNormN-0       1 1 head9_416 head9_427 0=256 1=1.000000e-05
+Split                    head9_splitncnn_1        1 3 head9_427 head9_427_splitncnn_0 head9_427_splitncnn_1 head9_427_splitncnn_2
+BinaryOp                 head9_Add_121            2 1 head9_427_splitncnn_2 head1_query_embed_splitncnn_17 head9_428
+Reshape                  head9_Reshape_10007      1 1 head9_428 head9_10007 0=256 1=-1
+Split                    head9_splitncnn_2        1 2 head9_10007 head9_428_splitncnn_0 head9_428_splitncnn_1
+Reshape                  head9_Reshape_10008      1 1 head9_427_splitncnn_1 head9_10008 0=256 1=-1
+InnerProduct             head9_MatMul_176         1 1 head9_10008 head9_484 0=256 1=1 2=65536
+InnerProduct             head9_MatMul_170         1 1 head9_428_splitncnn_1 head9_478 0=256 1=1 2=65536
+InnerProduct             head9_MatMul_173         1 1 head9_428_splitncnn_0 head9_481 0=256 1=1 2=65536
+Reshape                  head9_Reshape_201        1 1 head9_484 head9_508 0=32 1=8 2=-1
+Reshape                  head9_Reshape_184        1 1 head9_478 head9_491 0=32 1=8 2=-1
+Reshape                  head9_Reshape_193        1 1 head9_481 head9_500 0=32 1=8 2=-1
+Permute                  head9_Transpose_202      1 1 head9_508 head9_509 0=2
+Permute                  head9_Transpose_185      1 1 head9_491 head9_492 0=2
+Permute                  head9_Transpose_205      1 1 head9_500 head9_512 0=3
+BinaryOp                 head9_Div_204            1 1 head9_492 head9_511 0=3 1=1 2=5.656854e+00
+MatMul                   head9_MatMul_206         2 1 head9_511 head9_512 head9_513
+Softmax                  head9_Softmax_207        1 1 head9_513 head9_514 0=2 1=1
+MatMul                   head9_MatMul_208         2 1 head9_514 head9_509 head9_515
+Permute                  head9_Transpose_209      1 1 head9_515 head9_516 0=2
+Reshape                  head9_Reshape_214        1 1 head9_516 head9_521 0=256 1=-1
+InnerProduct             head9_MatMul_216         1 1 head9_521 head9_524 0=256 1=1 2=65536
+Reshape                  head9_Reshape_10009      1 1 head9_427_splitncnn_0 head9_10009 0=256 1=-1
+BinaryOp                 head9_Add_218            2 1 head9_10009 head9_524 head9_525
+LayerNorm                head9_LayerNormN-1       1 1 head9_525 head9_536 0=256 1=1.000000e-05
+Split                    head9_splitncnn_3        1 2 head9_536 head9_536_splitncnn_0 head9_536_splitncnn_1
+InnerProduct             head9_MatMul_231         1 1 head9_536_splitncnn_1 head9_540 0=2048 1=1 2=524288 9=1
+InnerProduct             head9_MatMul_235         1 1 head9_540 head9_543 0=256 1=1 2=524288
+BinaryOp                 head9_Add_237            2 1 head9_536_splitncnn_0 head9_543 head9_544
+LayerNorm                head9_LayerNormN-2       1 1 head9_544 head9_555 0=256 1=1.000000e-05
+LayerNorm                head9_LayerNormN-3       1 1 head9_555 head9_566 0=256 1=1.000000e-05
+Split                    head9_splitncnn_4        1 2 head9_566 head9_567_splitncnn_0 head9_567_splitncnn_1
+InnerProduct             head9_MatMul_262         1 1 head9_567_splitncnn_1 head9_570 0=81 1=1 2=20736
+InnerProduct             head9_MatMul_265         1 1 head9_567_splitncnn_0 head9_574 0=256 1=1 2=65536 9=1
+InnerProduct             head9_MatMul_269         1 1 head9_574 head9_578 0=256 1=1 2=65536 9=1
+InnerProduct             head9_MatMul_273         1 1 head9_578 head9_581 0=256 1=1 2=65536
+Reshape                  head9_Reshape_10010      1 1 head9_581 head9_10010 0=256 1=100 2=-1
+MatMul                   head9_Einsum_80          2 1 head9_10010 head0_mask_features_splitncnn_9 head9_582 0=0
+Reshape                  head9_Reshape_10001      1 1 head9_582 head9_10001 0=-1 1=200 2=100
+Interp                   head9_Resize_20000       1 1 head9_10001 head9_20000 0=2 1=4.000000e+00 2=4.000000e+00 3=0 4=0 6=0
+Softmax                  head9_Softmax_10000      1 1 head9_570 head9_20001 0=1 1=1
